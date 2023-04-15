@@ -206,7 +206,7 @@ public class Board {
 ``` 
 **Pregunta:** Realiza la cobertura de código. Explica tus respuestas.
 
-**Respuesta:**
+**Respuestas**
 
 ```java
 public class TestEmptyBoard {
@@ -248,12 +248,13 @@ public class Board {
 }	
 ```	
 
-## Sprint 2 
+# Sprint 2 
 
 **Historia de usuario 2:** Como jugador X, necesito colocar X en una celda vacía para poder hacer un movimiento.
 
 **Historia de usuario 3:** Como jugador O, necesito colocar O en una celda vacía para poder hacer un movimiento.
 
+## Criterio de Acepatación
 **Pregunta** Escribir los siguientes criterios de aceptación.
 
 ```
@@ -324,19 +325,173 @@ Cuando el jugador O hace un movimiento ilegal fuera del tablero
 Entonces la celda no se cambia.
 ```
 
-## Sprint 3
+# Sprint 3
+
+**Historia de usuario:** Como jugador, necesito saber si el juego termina después de cada movimiento.
+
+## Criterio de Acepatación
+```
+AC 4.1 Una victoria de X
+Dado un juego en curso sin XXX u OOO Y es el turno de X 
+Cuando el jugador X hace un movimiento válido para formar XXX 
+Entonces el juego ha terminado Y X ha ganado. 
+```
+
+```
+AC 4.2 Un juego que continúa después de un movimiento X 
+Dado un juego en curso sin XXX u OOO 
+Y es el turno de X
+Cuando el jugador X hace un movimiento válido que no forma XXX 
+Entonces el juego continúa 
+Y es el turno de O. 
+```
+
+```
+AC 4.3 Una victoria de O 
+Dado un juego en curso sin XXX o OOO 
+Y es el turno de O 
+Cuando el jugador O hace un movimiento válido para formar OOO 
+Entonces el juego ha terminado y O ha ganado. 
+```
+
+```
+AC 4.4 Un juego que continúa después de un movimiento O 
+Dado un juego en curso sin XXX u OOO 
+Y es el turno de O
+Cuando el jugador O hace un movimiento válido que no forma OOO 
+Entonces el juego continúa, y se convierte en el turno de X. 
+```
+
+```
+AC 4.5 Un juego empatado 
+Dado un juego en curso sin XXX u OOO 
+Y solo hay una celda vacía 
+Cuando un jugador hace un movimiento válido y no hay XXX u OOO 
+Entonces el juego termina, Y es un empate.
+```
+
 **Pregunta (V/F)** 
 La secuencia de cuatro movimientos, `X (0,0), O (1,1), X (0,1), O (1,0)` no cumple la  necesidad. 
 
-**Pregunta**
+**Respuestas**  
+Verdadero. La secuencia de cuatro movimientos, `X (0,0), O (1,1), X (0,1), O (1,0)` no cumple la necesidad debido a que para que exista una victoria de X, es necesario que el jugador X haga un movimiento válido para formar XXX.
 
-Para hacer que `testXWon` pase, `updateGameState` se enfoca en los escenarios `CROSS_WON`. Indica  al menos tres pruebas para `AC4.1` para cubrir tres X seguidas de manera horizontal, vertical y diagonal. 
+**Preguntas**
+- Para hacer que `testXWon` pase, `updateGameState` se enfoca en los escenarios `CROSS_WON`. Indica  al menos tres pruebas para `AC4.1` para cubrir tres X seguidas de manera horizontal, vertical y diagonal. 
+- Muestra que el método `testXWon` anterior ha cubierto `AC4.2` y `AC 4.4` y que el juego continuó hasta la jugada ganadora `board.makeMove (0, 2)`. 
+- ¿`AC4.3` es similar a `AC 4.1` ?. ¿Se trata de los escenarios `NAUGHT_WON`?. 
+- ¿Toda las pruebas para `AC4.1-AC4.5` permitirán completar la clase de `Board`?. 
 
-Muestra que el método `testXWon` anterior ha cubierto `AC4.2` y `AC 4.4` y que el juego continuó hasta la jugada ganadora `board.makeMove (0, 2)`. 
+**Respuestas**
 
-¿`AC4.3` es similar a `AC 4.1` ?. ¿Se trata de los escenarios `NAUGHT_WON`?. 
+- Para hacer que `testXWon` pase, `updateGameState` se enfoca en los escenarios `CROSS_WON`. Indica  al menos tres pruebas para `AC4.1` para cubrir tres X 
+```java
 
-¿Toda las pruebas para `AC4.1-AC4.5` permitirán completar la clase de `Board`?. 
+public class TicTacToeGameTest {
+  private TicTacToeGame game;
+  
+  @Before
+  public void setUp() {
+    game = new TicTacToeGame();
+  }
+
+  @Test
+  public void testXWon() {
+    // Configurar el tablero con tres X consecutivas en una fila horizontal
+    game.setCell(0, 0, 'X');
+    game.setCell(0, 1, 'X');
+    game.setCell(0, 2, 'X');
+
+    // Realizar el movimiento para formar XXX en la primera fila
+    game.updateGameState(0, 2);
+
+    // Comprobar que el juego ha terminado y X ha ganado
+    assertTrue(game.isGameOver());
+    assertEquals('X', game.getWinner());
+
+    // Reiniciar el juego para probar con otra configuración
+
+    game.resetGame();
+
+    // Configurar el tablero con tres X consecutivas en una columna vertical
+    game.setCell(0, 1, 'X');
+    game.setCell(1, 1, 'X');
+    game.setCell(2, 1, 'X');
+
+    // Realizar el movimiento para formar XXX en la segunda columna
+    game.updateGameState(2, 1);
+
+    // Comprobar que el juego ha terminado y X ha ganado
+    assertTrue(game.isGameOver());
+    assertEquals('X', game.getWinner());
+
+    // Reiniciar el juego para probar con otra configuración
+
+    game.resetGame();
+
+    // Configurar el tablero con tres X consecutivas en una diagonal
+    game.setCell(0, 0, 'X');
+    game.setCell(1, 1, 'X');
+    game.setCell(2, 2, 'X');
+
+    // Realizar el movimiento para formar XXX en la diagonal principal
+    game.updateGameState(2, 2);
+
+    // Comprobar que el juego ha terminado y X ha ganado
+    assertTrue(game.isGameOver());
+    assertEquals('X', game.getWinner());
+  }
+}
+```
+
+- Muestra que el método `testXWon` anterior ha cubierto `AC4.2` y `AC 4.4` y que el juego continuó hasta la jugada ganadora `board.makeMove (0, 2)`. 
+
+```java
+@Test
+public void testXWon() {
+  // Configurar el tablero con tres X consecutivas en una fila horizontal
+  game.setCell(0, 0, 'X');
+  game.setCell(0, 1, 'X');
+  game.setCell(0, 2, 'X');
+
+  // Realizar el movimiento para formar XXX en la primera fila
+  game.updateGameState(0, 2);
+
+  // Comprobar que el juego ha terminado y X ha ganado
+  assertTrue(game.isGameOver());
+  assertEquals('X', game.getWinner());
+
+  // Realizar un movimiento válido que no forma XXX
+  game.updateGameState(1, 0);
+
+  // Comprobar que el juego continúa y es el turno de O
+  assertFalse(game.isGameOver());
+  assertEquals('O', game.getCurrentPlayer());
+
+  // Realizar un movimiento válido que no forma OOO
+  game.updateGameState(1, 1);
+
+  // Comprobar que el juego continúa y se convierte en el turno de X
+  assertFalse(game.isGameOver());
+  assertEquals('X', game.getCurrentPlayer());
+
+  // Realizar la jugada ganadora para O
+  game.updateGameState(1, 2);
+
+  // Comprobar que el juego ha terminado y O ha ganado
+  assertTrue(game.isGameOver());
+  assertEquals('O', game.getWinner());
+}
+```
+
+- ¿`AC4.3` es similar a `AC 4.1` ?. ¿Se trata de los escenarios `NAUGHT_WON`?.
+
+Sí, AC4.3 es similar a AC4.1 en el sentido de que ambos se refieren a la victoria de un jugador en el juego, pero AC4.3 se enfoca en el jugador O (representado por 'O' o "naught" en el juego), mientras que AC4.1 se enfoca en el jugador X (representado por 'X' o "cross" en el juego).  
+En términos de implementación, se podría tener un método similar al testXWon para verificar si el jugador O ha ganado en el juego. 
+
+- ¿Toda las pruebas para `AC4.1-AC4.5` permitirán completar la clase de `Board`?. 
+
+Sí, todas las pruebas para AC4.1-AC4.5 permitirán completar la clase de Board.
 
 ### Refactorización 
 
@@ -355,10 +510,14 @@ public enum Cell {EMPTY, CROSS, NOUGHT}
 	public GameState getGameState();
 ```
 
-**Pregunta** ¿ Cuál es el problema de initialBoard  y por que le cambiamos el nombre a `resetGame`. 
+**Pregunta** ¿ Cuál es el problema de initialBoard  y por que le cambiamos el nombre a `resetGame`.
 
+**Respuestas**
 
-### Evolución de la implementación
+El problema con el nombre `initialBoard` es que no es claro acerca de su funcionalidad. El nombre `initialBoard` podría ser confuso y dar la impresión de que se refiere a la configuración inicial del tablero, cuando en realidad lo que hace es reiniciar el juego.  
+Por lo tanto, cambiar el nombre de `initialBoard` a `resetGame` sería más apropiado, ya que refleja con mayor precisión la funcionalidad de reiniciar el juego a su estado inicial, lo cual es más intuitivo y comprensible para los desarrolladores que lean o utilicen el código en el futuro.
+
+# Evolución de la implementación
 
 ![](Imagenes/AutoTicTacToe.png)
 
@@ -372,13 +531,12 @@ Aquí hay algunas especificaciones:
 
 - Modificación
    
-   * resetGame (`AC 5.1`) 
-   * Hace el primer movimiento automático si la computadora juega primero `makeMove` (`AC 5.2-5.4`)
-   * Termina con un movimiento automático si el juego no ha terminado.
+* resetGame (`AC 5.1`) 
+* Hace el primer movimiento automático si la computadora juega primero `makeMove` (`AC 5.2-5.4`)
+* Termina con un movimiento automático si el juego no ha terminado.
 
 Para implementar las características anteriores, podemos crear una subclase de `TicTacToeGame` e implementar la historia de usuario 5 (el primer movimiento X) en el constructor y `resetGame`.
 
 La elección de un movimiento automático en la historia de usuario  ocurre justo después de que el jugador humano se mueva. Podemos lograr esto sobreescribiendo `makeMove` e implementando los criterios de aceptación `5.2-5.4` por métodos individuales. 
 
 **Pregunta:** Verifica esto en el código del paquete del proyecto TicTacToe entregado.
-
