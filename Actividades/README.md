@@ -7,7 +7,7 @@
 
 **Historia de usuario 3:** Como jugador, necesito saber si el juego termina después de cada movimiento.
 
-## Criterios de Aceptación
+### Criterios de Aceptación
 
 **Pregunta** Escribir los siguientes criterios de aceptación.
 
@@ -105,7 +105,7 @@ public class TestEmptyBoard {
 }
 ```
 
-## Programación en pares
+### Programación en pares
 
 **Pregunta** Explica el funcionamiento de los siguientes código dentro del sprint1.
 
@@ -167,7 +167,7 @@ public class Console {
 
 **Respuesta** No se necesita refactorización, debido a que el codigo es bastante sencillo y entendible, quizas se puede mejorar la legibilidad del codigo, pero no es necesario.
 
-## Cobertura de código 
+### Cobertura de código 
 
 ```java
 public class TestEmptyBoard {
@@ -254,7 +254,7 @@ public class Board {
 
 **Historia de usuario 3:** Como jugador O, necesito colocar O en una celda vacía para poder hacer un movimiento.
 
-## Criterio de Acepatación
+### Criterio de Aceptación
 **Pregunta** Escribir los siguientes criterios de aceptación.
 
 ```
@@ -329,7 +329,7 @@ Entonces la celda no se cambia.
 
 **Historia de usuario:** Como jugador, necesito saber si el juego termina después de cada movimiento.
 
-## Criterio de Acepatación
+### Criterio de Aceptación
 ```
 AC 4.1 Una victoria de X
 Dado un juego en curso sin XXX u OOO Y es el turno de X 
@@ -523,7 +523,7 @@ Por lo tanto, cambiar el nombre de `initialBoard` a `resetGame` sería más apro
 
 Aquí hay algunas especificaciones:
 
-- La herencia y el principio abierto-cerrado 
+- La herencia y el principio abierto-cerrado
 
 - `AutoTicTacToe`  extiende `TicTacToeGame` 
 
@@ -531,12 +531,14 @@ Aquí hay algunas especificaciones:
 
 - Modificación
    
-* resetGame (`AC 5.1`) 
-* Hace el primer movimiento automático si la computadora juega primero `makeMove` (`AC 5.2-5.4`)
-* Termina con un movimiento automático si el juego no ha terminado.
+  * resetGame (`AC 5.1`) 
+  * Hace el primer movimiento automático si la computadora juega primero    `makeMove` (`AC 5.2-5.4`)
+  * Termina con un movimiento automático si el juego no ha terminado.
 
 Para implementar las características anteriores, podemos crear una subclase de `TicTacToeGame` e implementar la historia de usuario 5 (el primer movimiento X) en el constructor y `resetGame`.
 
 La elección de un movimiento automático en la historia de usuario  ocurre justo después de que el jugador humano se mueva. Podemos lograr esto sobreescribiendo `makeMove` e implementando los criterios de aceptación `5.2-5.4` por métodos individuales. 
 
 **Pregunta:** Verifica esto en el código del paquete del proyecto TicTacToe entregado.
+
+**Respuesta:** Sí, se puede verificar en el código del paquete del proyecto TicTacToe entregado.
