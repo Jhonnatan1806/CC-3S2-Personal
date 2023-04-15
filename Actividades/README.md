@@ -88,7 +88,7 @@ public class TestEmptyBoard {
 	      assertEquals(" ", board.getCell(row, column), 0);
 	    }
     }
-    assertEquals(" ", board.getTurn( ), ‘X’)
+    assertEquals(" ", board.getTurn( ), 'X')
   }
   
   // Criterio de aceptación 1.2 
@@ -169,7 +169,7 @@ public class Console {
 
 ## Cobertura de código 
 
-```
+```java
 public class TestEmptyBoard {
     private Board board = new Board ( );
     // Criterio de aceptación 1.1
@@ -180,16 +180,16 @@ public class TestEmptyBoard {
 	assertEquals(“ “, board.getCell(row, column), 0);
 	}
          }
-         assertEquals(“ “, board.getTurn( ), ‘X’)
+         assertEquals(“ “, board.getTurn( ), 'X')
       }
 }
 ``` 
 Ahora escribimos un nuevo código de producción para que pase la prueba. El nuevo código con información de cobertura se muestra a continuación.
 
-```
+```java
 public class Board {
      private int[] grid
-     private char turn = ‘X’;
+     private char turn = 'X';
      public Board(){
          grid = new int[3][3];  
        }
@@ -250,6 +250,81 @@ public class Board {
 
 ## Sprint 2 
 
+**Historia de usuario 2:** Como jugador X, necesito colocar X en una celda vacía para poder hacer un movimiento.
+
+**Historia de usuario 3:** Como jugador O, necesito colocar O en una celda vacía para poder hacer un movimiento.
+
+**Pregunta** Escribir los siguientes criterios de aceptación.
+
+```
+AC 2.1 Un movimiento X válido 
+Dado 
+Cuando  
+Entonces
+```
+
+```
+AC 2.2 Un movimiento X ilegal en una celda ocupada
+Dado 
+Cuando  
+Entonces
+Y
+```
+
+```
+AC 2.3 Un movimiento X ilegal fuera del tablero 
+Dado 
+Cuando  
+Entonces
+Y
+```
+
+**Respuestas**
+
+```
+AC 2.1 Un movimiento X válido 
+Dado un juego en curso con el turno de X 
+Cuando el jugador X hace un movimiento válido 
+Entonces X se coloca en la celda Y el turno se cambia a 0 
+```
+
+```
+AC 2.2 Un movimiento X ilegal en una celda ocupada
+Dado un juego en curso con el turno de X
+Cuando el jugador X intenta hacer un movimiento en una celda ya ocupada por X u O
+Entonces no se realiza el movimiento y el turno de X no cambia.
+```
+
+```
+AC 2.3 Un movimiento X ilegal fuera del tablero
+Dado un juego en curso con el turno de X
+Cuando el jugador X intenta hacer un movimiento fuera del tablero
+Entonces no se realiza el movimiento y el turno de X no cambia.
+```
+
+```
+AC 3.1 Un movimiento O válido
+Dado un juego en curso con el turno de O 
+Cuando el jugador O hace un movimiento válido
+Entonces se coloca O en la celda
+Y el turno se cambia a X 
+```
+
+```
+AC 3.2 Un movimiento O ilegal en una celda ocupada 
+Dado un juego en curso con el turno de O 
+Cuando el jugador O hace un movimiento ilegal dentro del tablero 
+Entonces no se cambia la celda Y no se cambia el turno  
+```
+
+```
+AC 3.3 Un movimiento O ilegal fuera del tablero 
+Dado un juego en curso con el turno de O 
+Cuando el jugador O hace un movimiento ilegal fuera del tablero 
+Entonces la celda no se cambia.
+```
+
+## Sprint 3
 **Pregunta (V/F)** 
 La secuencia de cuatro movimientos, `X (0,0), O (1,1), X (0,1), O (1,0)` no cumple la  necesidad. 
 
