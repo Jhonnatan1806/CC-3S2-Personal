@@ -208,45 +208,6 @@ public class Board {
 
 **Respuestas**
 
-```java
-public class TestEmptyBoard {
-  private Board board = new Board();
-
-  // Criterio de aceptación 1.1
-  @Test
-  public void testNewBoard() {
-    for (int row = 0; row < 3; row++) {
-      for (int column = 0; column < 3; column++) {
-        assertEquals(0, board.getCell(row, column)); // Corregido: comparar con valor entero 0
-      }
-    }
-    assertEquals('X', board.getTurn()); // Corregido: comparar con char 'X'
-  }   
-}
-```
-
-```java
-public class Board {
-  private int[][] grid; // Corregido: especificar tipo de datos int[][] en la declaración del arreglo
-  private char turn = 'X';
-
-  public Board() {
-    grid = new int[3][3];
-  }
-
-  public int getCell(int row, int column) {
-    if (row >= 0 && row < 3 && column >= 0 && column < 3) {
-      return grid[row][column];
-    } else {
-      return 0; // Corregido: retornar 0 para indicar celda vacía
-    }
-  }
-
-  public char getTurn() {
-    return turn;
-  }
-}	
-```	
 
 # Sprint 2 
 
