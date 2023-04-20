@@ -37,7 +37,11 @@ public class Calculadora {
     }
 
     public double squareRoot(double number) {
-        return Math.sqrt(number);
+        if (number < 0) {
+            throw new IllegalArgumentException("No se puede calcular la raiz cuadrada de un numero negativo");
+        } else {
+            return Math.sqrt(number);
+        }
     }
-
+    
 }

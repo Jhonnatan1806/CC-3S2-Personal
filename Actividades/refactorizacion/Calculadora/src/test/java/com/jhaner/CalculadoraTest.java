@@ -30,11 +30,6 @@ public class CalculadoraTest {
     }
 
     @Test
-    public void whenMultiplicationThenReturnCorrectAnswer() {
-        assertEquals(6, calculadora.multiplication(2, 3));
-    }
-
-    @Test
     public void whenDivisionThenReturnCorrectAnswer() {
         assertEquals(2, calculadora.division(8, 4));
     }
@@ -48,6 +43,11 @@ public class CalculadoraTest {
     }
 
     @Test
+    public void whenMultiplicationThenReturnCorrectAnswer() {
+        assertEquals(6, calculadora.multiplication(2, 3));
+    }
+
+    @Test
     public void whenPowerTwoNumbersThenReturnCorrectAnswer() {
         assertEquals(8.0, calculadora.power(2.0, 3.0), 0.001);
     }
@@ -57,5 +57,12 @@ public class CalculadoraTest {
         assertEquals(5.0, calculadora.squareRoot(25.0), 0.001);
     }
 
+    @Test
+    public void whenSquareRootOfNegativeNumberThenThrowException() {
+        Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
+            calculadora.squareRoot(-25.0);
+        });
+        assertEquals("No se puede calcular la raiz cuadrada de un numero negativo", exception.getMessage());
+    }
 
 }
