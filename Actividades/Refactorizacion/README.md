@@ -148,7 +148,7 @@ Test Rojo
 ![Imagen test rojo Requisito 6](Assets/Requisito6_rojo.png)
 Test Verde
 ![Imagen test verde Requisito 6](Assets/Requisito6_verde.png)
-Refactorizacion
+Refactorización
 ![Imagen test verde Requisito 6](Assets/Requisito6_refactorizacion.png)
 
 
