@@ -41,7 +41,7 @@ class Client{
 
     public Client(){
         Person person = new Person();
-        person.getDepartament().getManager();
+        Manager = person.getDepartament().getManager();
     }
 }
 ```
@@ -53,7 +53,7 @@ class Client{
 
     public Client(){
         Person person = new Person();
-        person.getManager();
+        Manager = person.getManager();
     }
 }
 
