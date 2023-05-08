@@ -79,7 +79,7 @@ La partición para el parámetro `a`:
 
 **Respuesta**
 
-- En un comentario justo antes del método `max()`
+- En un comentario al comienzo de `MathTest.java` 
 
 --- 
 
@@ -87,7 +87,7 @@ La anotación `@Test`
 
 **Respuesta**
 
-- Justo antes de la clase `MathTest` 
+- Justo antes de un método de prueba JUnit
 
 ---
 
