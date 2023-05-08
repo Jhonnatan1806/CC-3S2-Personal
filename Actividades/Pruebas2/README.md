@@ -15,6 +15,7 @@ valores = [0, 0, 1, 0, 0, 0, 0]
 
 Considero que la lista vacia es un caso limite porque la lista es demasiado pequeña para usar alguno de los algoritmos de ordenamiento.
 
+---
 
 ## Pruebas unitarias y de integración
 
@@ -32,6 +33,8 @@ Decides comprar una mezcla de especias prefabricada en una tienda especializada.
 
 Pones salsa y aderezos en una corteza y la horneas, para ver si la corteza todavía se cocina bien con las cosas húmedas encima. Esto es `Preparar el queso y otros productos`
 
+---
+
 ## Pruebas de regresión automatizadas
 
 ¿Cuál de los siguientes define mejor las pruebas de regresión?
@@ -40,8 +43,6 @@ Pones salsa y aderezos en una corteza y la horneas, para ver si la corteza todav
 
 - Cada componente en tu código debe tener un conjunto asociado de pruebas que ejerza todos los casos extremos en tu especificación.
 
----
-
 ¿Cuáles de los siguientes son buenos momentos para volver a ejecutar todas tus pruebas JUnit?
 
 **Respuesta**
@@ -49,6 +50,8 @@ Pones salsa y aderezos en una corteza y la horneas, para ver si la corteza todav
 - Antes de hacer git add/commit/push
 - Después de reescribir una función para hacerla más rápida
 - Después de pensar que solucionaste un error
+
+---
 
 ## Test First Development
 
@@ -65,13 +68,13 @@ Pones salsa y aderezos en una corteza y la horneas, para ver si la corteza todav
 
 - Pruebas de caja negra
 
----
-
 ¿Cuál de estos pasos ayudará a validar tu conjunto de pruebas antes de implementar el algoritmo de búsqueda binaria?
 
 **Respuesta**
 
 - Ejecutar una herramienta de cobertura de código en una implementación simple
+
+---
 
 ## Documenta tu estrategia de prueba
 
@@ -81,15 +84,12 @@ La partición para el parámetro `a`:
 
 - En un comentario al comienzo de `MathTest.java` 
 
---- 
-
 La anotación `@Test` 
 
 **Respuesta**
 
 - Justo antes de un método de prueba JUnit
 
----
 
 El comentario `covers a < b` 
 
@@ -97,7 +97,6 @@ El comentario `covers a < b`
 
 - En un comentario al comienzo de `Math.java`
 
----
 
 El comentario `@return` el máximo de `a` y `b`
 
