@@ -1,6 +1,6 @@
 package com.jhaner;
 
-public class VipMember extends Member implements OrganizeEvents{
+public class VipMember extends Member implements TournamentStaff {
 
     public VipMember(String nombre) {
         super(nombre);

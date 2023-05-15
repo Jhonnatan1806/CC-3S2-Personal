@@ -1,5 +1,5 @@
 package com.jhaner;
-public class PremiumMember extends Member implements OrganizeEvents {
+public class PremiumMember extends Member implements TournamentStaff {
     public PremiumMember(String nombre) {
         super(nombre);
     }

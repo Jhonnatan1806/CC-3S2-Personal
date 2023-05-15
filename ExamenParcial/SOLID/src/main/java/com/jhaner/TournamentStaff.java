@@ -1,6 +1,6 @@
 package com.jhaner;
 
-public interface OrganizeEvents {
+public interface TournamentStaff {
 
     void organizeTournament();
 
