@@ -1,8 +1,14 @@
+# Examen Parcial CC-3S2
+
+**Autor:** Jhonnatan Espinoza Rojas.
+
+**Fecha:** 2023-05-15.
+
 ## Pregunta 1
 
 ### Codigo sin refactorizar
 
-Clase Member
+#### Clase Member
 ```java
 public abstract class Member {
     private final String name;
@@ -14,7 +20,7 @@ public abstract class Member {
 }
 ```
 
-Clase PremiumMember
+#### Clase PremiumMember
 ```java
 public class PremiumMember extends Member {
     public PremiumMember(String nombre) {
@@ -34,7 +40,7 @@ public class PremiumMember extends Member {
 }
 ```
 
-Clase VipMember
+#### Clase VipMember
 ```java
 public class VipMember extends Member {
 
@@ -55,7 +61,7 @@ public class VipMember extends Member {
 }
 ```
 
-Clase FreeMember
+#### Clase FreeMember
 ```java
 public class FreeMember extends Member{
 
@@ -78,9 +84,8 @@ public class FreeMember extends Member{
 
 ### Codigo Refactorizado
 
-Removemos de nuestra clase Members el metodo organizeTournament()
-
-Clase Member
+#### Clase Member
+Primero removemos de nuestra clase Members el metodo `organizeTournament()`.
 ```java
 public abstract class Member {
     private final String name;
@@ -92,20 +97,20 @@ public abstract class Member {
 }
 ```
 
-Creamos una interface OrganizeEvents que implemente el metodo organizeTournament()
-
-Clase OrganizeEvents
+#### Clase TournamentStaff
+Luego creamos una interface TournamentStaff que implemente el metodo `organizeTournament()`.
 ```java
-public interface OrganizeEvents {
+public interface TournamentStaff {
 
     void organizeTournament();
 
 }
 ```
 
-Clase PremiumMember
+#### Clase PremiumMember
+Implementamos el metodo `organizeTournament()` en las clases que si pueden realizar torneos.
 ```java
-public class PremiumMember extends Member implements OrganizeEvents {
+public class PremiumMember extends Member implements TournamentStaff {
     public PremiumMember(String nombre) {
         super(nombre);
     }
@@ -123,9 +128,9 @@ public class PremiumMember extends Member implements OrganizeEvents {
 }
 ```
 
-Clase VipMember
+#### Clase VipMember
 ```java
-public class VipMember extends Member implements OrganizeEvents{
+public class VipMember extends Member implements TournamentStaff{
 
     public VipMember(String nombre) {
         super(nombre);
@@ -144,7 +149,8 @@ public class VipMember extends Member implements OrganizeEvents{
 }
 ```
 
-Clase FreeMember
+#### Clase FreeMember
+De esta forma podemos tener la clase `FreeMember` que no implemente la interface `TournamentStaff`.
 ```java
 public class FreeMember extends Member{
 
@@ -160,59 +166,96 @@ public class FreeMember extends Member{
 }
 ```
 
----
+Con esto podemos obtener un codigo compatible por el principio de **sustitucion de Liskov (LSP)**, ya que podemos sustituir la clase padre por cualquiera de sus clases hijas sin que el programa se vea afectado.
 
 ## Pregunta 2
 
 ## Requisito 1: colocación de piezas
 
-Se puede colocar una pieza en cualquier espacio vacío de un tablero de 3×3.
+### Historia de Usuario
+Como jugador, quiero poder colocar una pieza en cualquier espacio vacio del tablero de 3x3 para poder jugar el juego.
 
+### Criterios de Aceptacion
 ```
-AC 1.1
+AC 1.1 limites del tablero I
 CUANDO una pieza se coloca en cualquier lugar fuera del eje x, 
-DEBE lanzar una RuntimeException
+ENTONCES el sistema lanza una RuntimeException.
 ```
 
 ```
-AC 1.2
+AC 1.2 limites del tablero II
 CUANDO una pieza se coloca en cualquier lugar fuera del eje y, 
-DEBE lanzar una RuntimeException
+ENTONCES el sistema lanza una RuntimeException.
 ```
 
 ```
-AC 1.3
+AC 1.3 lugar ocupado
 CUANDO una pieza se coloca en un espacio ocupado,
-DEBE lanzar una RuntimeException
+ENTONCES el sistema lanza una RuntimeException.
 ```
 
+### Pruebas Unitarias
+
+#### Prueba - limites del tablero I
+```java
+@Test
+void testRuntimeExceptionWhenXPositionOutOfRange() {
+    Assertions.assertThrows(RuntimeException.class, () -> {
+        Game game = new Game();
+        game.makeMove(-1,1,Cell.CROSS);
+    });
+}
+```
+
+#### Prueba - limites del tablero II
+```java
+@Test
+void testRuntimeExceptionWhenYPositionOutOfRange() {
+    Assertions.assertThrows(RuntimeException.class, () -> {
+        Game game = new Game();
+        game.makeMove(1,4,Cell.CROSS);
+    });
+}
+```
+
+#### Prueba - lugar ocupado
+```java
+@Test
+void testRuntimeExceptionWhenNotEmptyCell() {
+    Assertions.assertThrows(RuntimeException.class, () -> {
+        Game game = new Game();
+        game.makeMove(1,4,Cell.CROSS);
+    });
+}
+```
 
 ## Requisito 2: agregar soporte para dos jugadores
 
-Implementar metodo para saber qué jugador debería jugar a continuación
+### Historia de Usuario
+Como jugador, quiero que el sistema determine que jugador debe jugar a continuación en el juego
 
-
-- Si el último turno fue jugado por X, entonces el próximo turno debe ser jugado por O
-- Si el último turno fue jugado por O, entonces el próximo turno debe ser jugado por X
-
+### Criterios de Aceptacion
 ```
-AC 2.1
-CUANDO inicie el juego el primer turno
-DEBE de jugarlo el jugador X.
+AC 2.1 X juega primero
+CUANDO inicia el juego el primer turno
+ENTONCES debe de jugarlo el jugador X.
 ```
 
 ```
-AC 2.2
+AC 2.2 O juego justo después de X
 CUANDO el ultimo turno fue jugado por X,
-DEBE cambiar al turno del jugador O
+ENTONCES debe cambiar al turno del jugador O.
 ```
 
 ```
-AC 2.3
+AC 2.3 X juega justo después de O
 CUANDO el ultimo turno fue jugado por O,
-DEBE cambiar al turno del jugador X
+ENTONCES debe cambiar al turno del jugador X.
 ```
 
+### Pruebas Unitarias
+
+## Requisito 3: determinar el ganador
 
 ## Pregunta 3
 
