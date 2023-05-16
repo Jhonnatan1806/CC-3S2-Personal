@@ -837,7 +837,7 @@ test_edad_promedio()
 
 #### Covertura de codigo
 
-Aqui podemos ver como pasa los test en verde
+Podemos ver como pasa los test en verde
 
 ![imagen covertura de codigo](assets/pytest_3.png)
 
