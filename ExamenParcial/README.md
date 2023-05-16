@@ -447,6 +447,7 @@ Lo que nos genero un build con un reporte de covertura de codigo, el cual se pue
 ## Pregunta 3
 
 Actualmente usamos nextJS, un framework de JS que utiliza React, este framework nos brinda la estructura de las carpetas, nextjs en su documentacion nos pide que los test se almacenen dentro de la carpeta `src\__tests__` y que los archivos de test terminen con `.test.js` o `.test.ts`. 
+https://nextjs.org/docs/pages/building-your-application/optimizing/testing#creating-your-tests
 
 Utilizaremos una clase de test llamada `requisitos.test.ts` de manera temporal para el desarrollo de los requisitos del examen.
 
