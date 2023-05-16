@@ -72,6 +72,14 @@ public class Game {
         return players[indexTurn].getLetter();
     }
 
+    /**
+     * Verifica si el jugador actual ha ganado el juego en la posicion especificada.
+     *
+     * @param turn    la letra del jugador actual
+     * @param row     la fila de la posicion
+     * @param column  la columna de la posicion
+     * @return true si el jugador actual ha ganado en la posicion especificada, false de lo contrario
+     */
     private boolean hasWon(Letter turn, int row, int column) {
         Letter token = (turn==Letter.CROSS)? Letter.CROSS: Letter.NOUGHT;
         boolean isWinRow  = board.getCell(row,0) == token && board.getCell(row,1) == token && board.getCell(row,2) == token;
@@ -82,7 +90,12 @@ public class Game {
         return isWinRow || isWinColumn || isWinMainDiagonal || isWinSecondaryDiagonal;
     }
 
-    private boolean isDraw() {
+    /**
+     * Verifica si el juego ha terminado en un empate.
+     *
+     * @return true si el juego ha terminado en un empate, false de lo contrario
+     */
+    public boolean isDraw() {
         for (int row = 0; row < TOTAL_ROWS; ++row) {
             for (int col = 0; col < TOTAL_COLUMNS; ++col) {
                 if (this.board.isEmptyCell(row, col)) {
@@ -93,7 +106,14 @@ public class Game {
         return true;
     }
 
-    private void updateGameState(Letter turn, int row, int column) {
+    /**
+     * Actualiza el estado del juego segun el turno, fila y columna especificados.
+     *
+     * @param turn    la letra del jugador actual
+     * @param row     la fila de la posicion
+     * @param column  la columna de la posicion
+     */
+    public void updateGameState(Letter turn, int row, int column) {
         if (hasWon(turn, row, column)) {
             currentGameState = (turn == Letter.CROSS) ? GameState.CROSS_WON : GameState.NOUGHT_WON;
         } else if (isDraw()) {
@@ -101,6 +121,11 @@ public class Game {
         }
     }
 
+    /**
+     * Devuelve el estado actual del juego.
+     *
+     * @return el estado actual del juego
+     */
     public GameState getGameState() {
         return currentGameState;
     }
