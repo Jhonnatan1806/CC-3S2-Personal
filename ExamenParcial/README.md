@@ -432,7 +432,7 @@ void testGameEndsWithDraw(){
 }
 ```
 
-### Covertura de codigo JaCoCo
+### Covertura de codigo - JaCoCo
 
 Se uso la guia del examen y se agrego al `build.graddle` las siguientes lineas de codigo:
 
