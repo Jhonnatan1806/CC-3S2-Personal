@@ -27,7 +27,7 @@ class MoveValidationTest {
     @Test
     void testRuntimeExceptionWhenXPositionOutOfRange() {
         Assertions.assertThrows(RuntimeException.class, () -> {
-            game.makeMove(-1,1, Letter.CROSS);
+            game.makeMove(-1,1);
         });
     }
 
@@ -39,7 +39,7 @@ class MoveValidationTest {
     @Test
     void testRuntimeExceptionWhenYPositionOutOfRange() {
         Assertions.assertThrows(RuntimeException.class, () -> {
-            game.makeMove(1,4, Letter.CROSS);
+            game.makeMove(1,4);
         });
     }
 
@@ -51,8 +51,8 @@ class MoveValidationTest {
     @Test
     void testRuntimeExceptionWhenNotEmptyCell() {
         Assertions.assertThrows(RuntimeException.class, () -> {
-            game.makeMove(1,1, Letter.CROSS);
-            game.makeMove(1,1, Letter.NOUGHT);
+            game.makeMove(1,1);
+            game.makeMove(1,1);
         });
     }
 
