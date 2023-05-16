@@ -432,7 +432,7 @@ apply plugin: 'jacoco'
 
 Lo que nos genero un build con un reporte de covertura de codigo, el cual se puede ver en la siguiente imagen:
 
-![imagen covertura de codigo](/assets/coverage.png)
+![imagen covertura de codigo](assets/coverage.png)
 
 ## Pregunta 3
 
@@ -448,5 +448,67 @@ Las pruebas efectivas y sistematicas son pasos a seguir para generar un conjunto
 - Explorando las posibles propiedades del programa
 - Realizando pruebas unitarias y de integracion
 
-###
+### Pruebas
 
+(a) Comienza a implementar una estrategia de prueba sistemática para esta función
+escribiendo una buena partición del espacio de entrada solo en el límite de entrada, es
+decir, la partición no debe mencionar ni el texto ni el delimitador
+
+#### Requerimientos del sistema
+
+- La funcion `split` debe retornar una lista con los elementos del string separados por el delimitador, si el limite es positivo, solo hasta el limite especificado
+- La funcion `split` debe retornar una lista con los elementos del string separados por el delimitador, pero solo hasta el limite especificado, si el limite es negativo no hay limite superior
+- La funcion `split` debe retornar una lista con los elementos del string separados por el delimitador, pero solo hasta el limite especificado, si el limite es igual a cero, no hay limite superior
+
+#### Particion del limite de entrada
+
+Podemos comenzar con una particion de entrada que contenga los siguientes casos:
+
+Particion de entrada:
+- Limite positivo: `límite > 0`
+- Limite negativo: `límite < 0`
+- Limite igual a cero: `límite = 0`
+
+#### Pruebas unitarias
+
+```java
+@Test
+void testSplitWithLimitPositive() {
+    List<String> res = split("a|b|c", '|', 2);
+    Assertions.assertEquals(Arrays.asList("a", "b|c"), res);
+}
+
+@Test
+void testSplitWithLimitNegative() {
+    List<String> res = split("a|b|c", '|', -1);
+    Assertions.assertEquals(Arrays.asList("a", "b", "c"), res);
+}
+
+@Test
+void testSplitWithLimitZero() {
+    List<String> res = split("a|b|c", '|', 0);
+    Assertions.assertEquals(Arrays.asList("a", "b", "c"), res);
+}
+```
+
+(b) Ahora, escriba una buena partición del espacio de entrada sobre la relación entre el
+límite y las ocurrencias del delimitador en el texto. Tu partición debe mencionar las tres entradas.
+
+#### Particion de la relacion entre el limite y las ocurrencias del delimitador en el texto
+
+Limite positivo (limite > 0):
+
+- Caso 1: El delimitador no aparece en el texto.
+- Caso 2: El delimitador aparece en el texto menos veces que el valor del limite.
+- Caso 3: El delimitador aparece exactamente el mismo numero de veces que el valor del limite en el texto.
+- Caso 4: El delimitador aparece más veces que el valor del límite en el texto.
+
+Limite negativo (limite < 0):
+
+- Caso 5: El delimitador no aparece en el texto.
+- Caso 6: El delimitador aparece al menos una vez en el texto.
+
+Límite igual a cero (limite = 0):
+
+- Caso 7: El delimitador no aparece en el texto.
+- Caso 8: El delimitador aparece al menos una vez en el texto.
