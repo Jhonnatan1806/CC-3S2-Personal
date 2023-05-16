@@ -505,7 +505,7 @@ test("AC 1.3", () => {
 
 #### Criterios de Aceptacion
 ```
-AC 2.1 X juega primero
+AC 2.1 Player 1 juega primero
 CUANDO inicia el juego el primer turno
 ENTONCES debe de jugarlo el Player 1.
 ```
