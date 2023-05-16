@@ -834,7 +834,7 @@ test_salario_promedio()
 test_edad_promedio()
 ```
 
-#### Coviertura de codigo
+#### Covertura de codigo
 
 Aqui podemos ver como pasa los test en verde
 
