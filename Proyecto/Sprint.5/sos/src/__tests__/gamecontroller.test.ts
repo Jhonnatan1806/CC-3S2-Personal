@@ -14,7 +14,7 @@ describe("GameController SimpleGame PvP", () => {
 	beforeEach(() => {
 		const board = new Board();
 		const players = [new Player("Red"), new Player("Blue")];
-		const game = new Game(board, Mode.SIMPLE_GAME, players);
+		const game = new Game(board, players,Mode.SIMPLE_GAME);
 
 		gameController = new GameController(game);
 	});
@@ -26,8 +26,10 @@ describe("GameController SimpleGame PvP", () => {
 		 * ENTONCES, el sistema debe mostrar el tablero con el tamaño seleccionado.
 		 */
 		test("AC 1.1", () => {
-			const newBoard = new Board(4, 4);
-			gameController.getGame().setBoard(newBoard);
+			const board = new Board(4, 4);
+      const players = [new Player("Red"), new Player("Blue")];
+      const game = new Game(board, players, Mode.SIMPLE_GAME);
+      gameController = new GameController(game);
 			expect(gameController.getGame().getBoard().getGrid()).toHaveLength(
 				4
 			);
@@ -39,8 +41,10 @@ describe("GameController SimpleGame PvP", () => {
 		 * ENTONCES, si el usuario inicia una partida sin haber seleccionado un tamaño de tablero, el juego debe iniciarse en el tablero 3x3.
 		 */
 		test("AC 1.2", () => {
-			const newBoard = new Board();
-			gameController.getGame().setBoard(newBoard);
+			const board = new Board();
+      const players = [new Player("Red"), new Player("Blue")];
+      const game = new Game(board, players,Mode.SIMPLE_GAME);
+      gameController = new GameController(game);
 			expect(gameController.getGame().getBoard().getGrid()).toHaveLength(
 				3
 			);
@@ -54,9 +58,11 @@ describe("GameController SimpleGame PvP", () => {
 		 * ENTONCES, el sistema debe mostrar el tablero con el modo de juego seleccionado.
 		 */
 		test("AC 2.1", () => {
-			const newMode = Mode.SIMPLE_GAME;
-			gameController.getGame().setMode(newMode);
-			expect(gameController.getGame().getMode()).toBe(Mode.SIMPLE_GAME);
+			const board = new Board(3,3);
+      const players = [new Player("Red"), new Player("Blue")];
+      const game = new Game(board, players, Mode.GENERAL_GAME); 
+      gameController = new GameController(game);
+			expect(gameController.getGame().getMode()).toBe(Mode.GENERAL_GAME);
 		});
 
 		/**
@@ -65,6 +71,10 @@ describe("GameController SimpleGame PvP", () => {
 		 * ENTONCES, si el usuario inicia una partida sin haber seleccionado un modo de juego, el juego debe iniciarse en el tablero seleccionado con el modo simple.
 		 */
 		test("AC 2.2", () => {
+      const board = new Board(3,3);
+      const players = [new Player("Red"), new Player("Blue")];
+      const game = new Game(board, players);
+      gameController = new GameController(game);
 			expect(gameController.getGame().getMode()).toBe(Mode.SIMPLE_GAME);
 		});
 
@@ -74,9 +84,11 @@ describe("GameController SimpleGame PvP", () => {
 		 * ENTONCES, el sistema debe mostrar el tablero con el tamaño y modo de juego seleccionado.
 		 */
 		test("AC 3.1", () => {
-			expect(gameController.getGame().getBoard().getGrid()).toHaveLength(
-				3
-			);
+      const board = new Board(4, 4);
+      const players = [new Player("Red"), new Player("Blue")];
+      const game = new Game(board, players, Mode.SIMPLE_GAME);
+      gameController = new GameController(game);
+			expect(gameController.getGame().getBoard().getGrid()).toHaveLength(4);
 			expect(gameController.getGame().getMode()).toBe(Mode.SIMPLE_GAME);
 		});
 	});
@@ -152,7 +164,7 @@ describe("GameController SimpleGame PvC", () => {
 	beforeEach(() => {
 		const board = new Board();
 		const players = [new Human("Red"), new Computer("Blue", IDifficulty.EASY)];
-		const game = new Game(board, Mode.SIMPLE_GAME, players);
+		const game = new Game(board, players);
 
 		gameController = new GameController(game);
 	});
@@ -180,7 +192,7 @@ describe("GameController SimpleGame CvC", () => {
 	beforeEach(() => {
 		const board = new Board();
 		const players = [new Computer("Red", IDifficulty.EASY), new Computer("Blue", IDifficulty.EASY)];
-		const game = new Game(board, Mode.SIMPLE_GAME, players);
+		const game = new Game(board, players);
 
 		gameController = new GameController(game);
 	});

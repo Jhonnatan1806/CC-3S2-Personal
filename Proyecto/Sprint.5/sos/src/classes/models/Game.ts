@@ -21,8 +21,8 @@ export class Game {
 	 */
 	constructor(
 		board: Board,
-		mode: Mode = Mode.SIMPLE_GAME,
-		players: Player[]
+    players: Player[],
+		mode: Mode = Mode.SIMPLE_GAME
 	) {
 		this.board = board;
 		this.mode = mode;
