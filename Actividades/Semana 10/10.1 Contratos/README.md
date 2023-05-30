@@ -79,12 +79,12 @@ public double calculateTax(double value) {
 
 :white_check_mark: **Respuesta**
 
-:small_blue_diamond: Precondiciones
+Precondiciones
 
 * El parámetro `product` no debe ser nulo.
 * El parámetro `qtyToAdd` debe ser un número entero positivo mayor que cero.
 
-:small_blue_diamond: Postcondiciones
+Postcondiciones
 
 * El producto se agrega al carrito de compras.
 * La cantidad de productos agregados al carrito de compras se actualiza.
@@ -116,14 +116,14 @@ public void add(Product product, int qtyToAdd) {
 
 :white_check_mark: **Respuesta**
 
-:small_blue_diamond: Postcondiciones
+Postcondiciones
 
 * El producto se agrega al carrito de compras.
 * La cantidad de productos agregados al carrito de compras se actualiza.
 * El valor total de la compra se actualiza.
 * El nuevo valor total debe ser mayor que el valor total anterior.
 
-Estas nuevas postcondiciones aseguran que el producto se agrega correctamente al carrito, ademas se actualiza el valor total de manera precisa utilizando la clase `BigDecimal`, y se verifica que el nuevo valor total sea mayor que el valor total anterior para evitar problemas de redondeo y asegurar la integridad del código.
+Estas nuevas postcondiciones aseguran que el producto se agrega correctamente al carrito, ademas se actualiza el valor total de manera precisa utilizando la clase `BigDecimal`, y se verifica que el nuevo valor total sea mayor que el valor total anterior para evitar problemas de redondeo y asegurar la integridad de los datos.
 
 ```java
 public void add(Product product, int qtyToAdd) {
@@ -157,12 +157,12 @@ public void add(Product product, int qtyToAdd) {
 
 :white_check_mark: **Respuesta**
 
-:small_blue_diamond: Precondiciones
+Precondiciones
 
 * El parámetro `product` no debe ser nulo.
 * El producto debe existir en el carrito de compras.
 
-:small_blue_diamond: Postcondiciones
+Postcondiciones
 
 * El producto se elimina del carrito de compras.
 * La cantidad de productos eliminados del carrito de compras se actualiza.
@@ -194,3 +194,55 @@ public void remove(Product product) {
 }
 ```
 
+:question: Explica y completa el siguiente listado de invariantes de la clase Basket:
+
+:white_check_mark: **Respuesta**
+
+Invariante 1
+* Invariante: El producto y la cantidad a agregar no pueden ser nulos o negativos
+* Explicación: El método `add()` no permite agregar un producto nulo o una cantidad negativa al carrito.
+
+Invariante 2
+* Invariante: El producto debe existir en el carrito antes de su eliminación.
+* Explicación: El método `remove()` verifica que el producto a eliminar exista en el carrito antes de su eliminación.
+
+Invariante 3
+* Invariante: Después de agregar un producto, el valor total del carrito debe ser mayor que el valor total anterior.
+* Explicación: El método `add()` realiza una comparación entre el nuevo valor total y el valor total anterior, asegurando que el nuevo valor total sea mayor.
+
+Invariante 4
+* Invariante: El valor total del carrito nunca puede ser negativo.
+* Explicación: Tanto en el método add() como en el método remove(), se verifica que el valor total del carrito no sea negativo después de realizar las operaciones correspondientes.
+
+Completando el código:
+```java
+public class Basket {
+    private BigDecimal totalValue = BigDecimal.ZERO;
+    private Map<Product, Integer> basket = new HashMap<>();
+
+    public void add(Product product, int qtyToAdd) {
+        assert product != null : "El producto no puede ser nulo.";
+        assert qtyToAdd > 0 : "La cantidad a agregar debe ser un número entero positivo mayor que cero.";
+
+        BigDecimal oldTotalValue = totalValue;
+
+        assert basket.containsKey(product) : "El producto debe existir en el carrito antes de agregarlo.";
+        assert totalValue.compareTo(oldTotalValue) == 1 : "El nuevo valor total debe ser mayor que el valor total anterior.";
+        assert totalValue.compareTo(BigDecimal.ZERO) >= 0 : "El valor total no puede ser negativo.";
+    }
+
+    public void remove(Product product) {
+        assert product != null : "El producto no puede ser nulo.";
+        assert basket.containsKey(product) : "El producto debe existir en el carrito antes de eliminarlo.";
+
+        assert !basket.containsKey(product) : "El producto no debe existir en el carrito después de eliminarlo.";
+        assert totalValue.compareTo(BigDecimal.ZERO) >= 0 : "El valor total no puede ser negativo.";
+    }
+}
+```
+
+:question: ¿Qué función tiene el método `invariant()` en el siguiente listado?
+
+:white_check_mark: **Respuesta**
+
+El método `invariant()` tiene la función de verificar si se cumple que el valor total del carrito nunca puede ser negativo.
