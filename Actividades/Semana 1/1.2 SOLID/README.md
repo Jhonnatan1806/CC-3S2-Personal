@@ -121,13 +121,46 @@ En este caso una de las ventajas sería que si se quisiera agregar un nuevo tipo
 
 :white_check_mark: **Respuesta**
 
+```
+Demostracion sin LSP
+
+Recuperando de Abejita, ultimos detalles de pagos.
+------
+Recuperando de Chalito, ultimos detalles de pagos.
+------
+Procesando de Abejita, la actual solicitud de pagos .
+------
+Procesando de Chalito, la actual solicitud de pagos .
+------
+```
+
 :question: Dentro del método main(), ahora crea una instancia de usuario invitado e intenta usar su clase auxiliar de la misma manera.
 
 :white_check_mark: **Respuesta**
 
+Agreamos la siguien linea
+
+```java
+GuestUserPayment guestUser = new GuestUserPayment();
+helper.addUser(guestUser);
+```
+
 :question: Realiza una salida de muestra y describe la excepción resultante. ¿Cuál es el problema?.
 
 :white_check_mark: **Respuesta**
+
+```
+Demostracion sin LSP
+
+Recuperando de Abejita, ultimos detalles de pagos.
+------
+Recuperando de Chalito, ultimos detalles de pagos.
+------
+Exception in thread "main" java.lang.UnsupportedOperationException
+	at NoSolid.LSP.GuestUserPayment.previousPaymentInfo(GuestUserPayment.java:10)
+	at NoSolid.LSP.PaymentHelper.showPreviousPayments(PaymentHelper.java:14)
+	at NoSolid.LSP.Cliente.main(Cliente.java:21)
+```
 
 :question: Elimina el método newPayment() de la interfaz de payment. Coloca este método en otra interfaz llamada NewPayment. Ahora tienes dos interfaces con las operaciones específicas. Dado que todos los tipos de usuarios pueden generar una nueva solicitud de pago, las clases concretas de RegisteredUserPayment y GuestUserPayment implementan la interfaz NewPayment y muestran el último detalle de pago solo para los usuarios registrados. Así la clase RegisteredUser implementa la interfaz payment. Dado que Payment contiene el método previousPaymentInfo(), tiene sentido elegir un nombre mejor, como PreviousPayment en lugar de Payment. Entonces, ahora deberías ver las siguientes interfaces:
 
