@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module version="4">
+  <component name="AdditionalModuleElements">
+    <content url="file://$MODULE_DIR$" dumb="true">
+      <excludeFolder url="file://$MODULE_DIR$/src/main/java/NoSolid/DIP" />
+      <excludeFolder url="file://$MODULE_DIR$/src/main/java/NoSolid/ISP" />
+      <excludeFolder url="file://$MODULE_DIR$/src/main/java/NoSolid/LSP" />
+      <excludeFolder url="file://$MODULE_DIR$/src/main/java/Solid/DIP" />
+      <excludeFolder url="file://$MODULE_DIR$/src/main/java/Solid/ISP" />
+      <excludeFolder url="file://$MODULE_DIR$/src/main/java/Solid/LSP" />
+      <excludeFolder url="file://$MODULE_DIR$/src/main/java/NoSolid/SRP" />
+      <excludeFolder url="file://$MODULE_DIR$/src/main/java/Solid/SRP" />
+    </content>
+  </component>
+</module>

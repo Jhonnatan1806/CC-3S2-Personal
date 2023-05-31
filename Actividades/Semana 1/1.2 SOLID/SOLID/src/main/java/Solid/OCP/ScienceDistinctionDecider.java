@@ -1,6 +1,8 @@
 package Solid.OCP;
 
 public class ScienceDistinctionDecider implements DistinctionDecider {
+
     @Override
-    // completa
+    public void evaluateDistinction(Estudiante estudiante) {
+    }
 }

@@ -6,11 +6,26 @@ Archivo original: [SOLID - Kapumota](https://github.com/kapumota/Actividades/blo
 
 Fecha de entrega: `02/04/23`
 
-## Principio de responsabilidad única
+## Principio de responsabilidad única - SRP
 
 :question: Realiza una salida de muestra. Ten en cuenta que la identificación(ID) de un empleado puede variar en tu caso porque genera un número aleatorio para obtener la identificación (ID) del empleado.
 
 :white_check_mark: **Respuesta**
+
+```
+Demostracion sin SRP
+Nombre del empleado: Abejita,Jessica
+Este empleado tiene 7.5 años de experiencia.
+El ID del empleado es: J393
+Este empleado es un empleado senior
+
+*******
+
+Nombre del empleado: Smart,Chalito
+Este empleado tiene 3.2 años de experiencia.
+El ID del empleado es: C169
+Este empleado es un empleado junior
+```
 
 :question: ¿Cuál es el problema con este diseño?
 
@@ -18,23 +33,75 @@ Fecha de entrega: `02/04/23`
 
 La clase Empleado tiene dos responsabilidades distintas, mostrar los detalles del empleado y generar el ID del empleado. En el método generateEmpId, estás generando el ID del empleado, pero también está actualizando el estado de la instancia de Empleado.
 
+:question: Demostracion con SRP.
+
+:white_check_mark: **Respuesta**
+
+```
+Demostracion de SRP
+Nombre del empleado: Abejita,Jessica
+Este empleado tiene 7.5 años de experiencia.
+El id del empleado es: J862
+Este empleado es un empleado senior
+
+*******
+
+Nombre del empleado: Smart,Chalito
+Este empleado tiene 3.2 años de experiencia.
+El id del empleado es: C596
+Este empleado es un empleado junior
+```
+
 :question: Realiza una demostración completa que sigue a SRP. Explica los resultados
 
 :white_check_mark: **Respuesta**
 
-## Principio abierto/cerrado
+* Creamos una clase `Cliente` que se encarga de crear instancias de Empleado y llamar al método `showEmpDetail` para mostrar los detalles del empleado, generar el ID del empleado y verificar su nivel laboral.
+* La clase `Empleado` solo se encarga de almacenar la información del empleado, como el nombre, el apellido y los años de experiencia.
+* La clase `GeneradorIDEmpleado` se encarga de generar el ID del empleado
+* La clase `SeniorityChecker` se encarga de verificar el nivel laboral del empleado.
 
-:question: ¿Por qué?.
+Esto cumple con el principio de responsabilidad única, ya que cada clase tiene una sola responsabilidad y no tiene más de una razón para cambiar. Por ejemplo, si se quisiera cambiar la forma en que se genera el ID del empleado, solo se tendría que modificar la clase GeneradorIDEmpleado y no se tendría que modificar la clase Empleado. De esta manera, el código se vuelve más flexible y se pueden hacer cambios sin afectar la funcionalidad existente, lo que facilita su mantenimiento y extensión en el futuro.
+
+## Principio abierto/cerrado - OCP
+
+:question: Si entiendes el principio SRP mencionado anteriormente no querrás colocar displayResult() y evaluateDistinction() en la misma clase. ¿Por qué?.
 
 :white_check_mark: **Respuesta**
+
+No se debería colocar displayResult() y evaluateDistinction() en la misma clase, ya que violaría el principio de SRP de SOLID. En este caso la clase Student tiene dos responsabilidades distintas, mostrar los detalles del estudiante y evaluar su distinción.
 
 :question: Realiza una salida de muestra.
 
 :white_check_mark: **Respuesta**
 
-:question: Realiza una salida de muestra.
-
-:white_check_mark: **Respuesta**
+```
+Demostracion sin OCP
+Resultados:
+Nombre: Irene
+Numero Regex: R1
+Dept:Ciencia de la Computacion.
+Marks:81.5
+*******
+Nombre: Jessica
+Numero Regex: R2
+Dept:Fisica
+Marks:72.0
+*******
+Nombre: Chalo
+Numero Regex: R3
+Dept:Historia
+Marks:71.0
+*******
+Nombre: Claudio
+Numero Regex: R4
+Dept:Literatura
+Marks:66.5
+*******
+Distinciones:
+R1 ha recibido una distincion en ciencias.
+R3 ha recibido una distincion en artes.
+```
 
 :question: Modifica el método de evaluateDistinction() y agrega otra instrucción if para considerar a los estudiantes de comercio. ¿Está bien modificar el método evaluateDistinction()de esta manera?.
 
