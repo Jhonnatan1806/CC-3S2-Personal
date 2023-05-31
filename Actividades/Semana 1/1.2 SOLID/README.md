@@ -69,7 +69,7 @@ Esto cumple con el principio de responsabilidad única, ya que cada clase tiene 
 
 :white_check_mark: **Respuesta**
 
-No se debería colocar displayResult() y evaluateDistinction() en la misma clase, ya que violaría el principio de SRP de SOLID. En este caso la clase Student tiene dos responsabilidades distintas, mostrar los detalles del estudiante y evaluar su distinción.
+No se debería colocar `displayResult()` y `evaluateDistinction()` en la misma clase, ya que violaría el principio de SRP de SOLID. En este caso la clase Student tiene dos responsabilidades distintas, mostrar los detalles del estudiante y evaluar su distinción.
 
 :question: Realiza una salida de muestra.
 
@@ -103,17 +103,17 @@ R1 ha recibido una distincion en ciencias.
 R3 ha recibido una distincion en artes.
 ```
 
-:question: Modifica el método de evaluateDistinction() y agrega otra instrucción if para considerar a los estudiantes de comercio. ¿Está bien modificar el método evaluateDistinction()de esta manera?.
+:question: Modifica el método de evaluateDistinction() y agrega otra instrucción if para considerar a los estudiantes de comercio. ¿Está bien modificar el método evaluateDistinction() de esta manera?.
 
 :white_check_mark: **Respuesta**
 
-No está bien modificar el método evaluateDistinction(), ya que violaría el principio de Open-Closed (OCP) de SOLID. En este caso la modificación directa del método evaluateDistinction() para incluir a los estudiantes de comercio viola este principio, ya que si se agregara otra categoría en el futuro, se tendría que modificar nuevamente el método y se rompería el principio de OCP.
+No está bien modificar el método `evaluateDistinction()`, ya que violaría el principio de Open-Closed (OCP) de SOLID. En este caso la modificación directa del método `evaluateDistinction()` para incluir a los estudiantes de comercio viola este principio, ya que si se agregara otra categoría en el futuro, se tendría que modificar nuevamente el método y se rompería el principio de OCP.
 
 :question: ¿Cuáles son las principales ventajas ahora?.
 
 :white_check_mark: **Respuesta**
 
-En este caso una de las ventajas sería que si se quisiera agregar un nuevo tipo de estudiante, como por ejemplo, un estudiante de negocios, se podría crear una nueva clase llamada BusinessStudent que implemente la interfaz Estudiante y agregarla a las listas de estudiantes sin necesidad de modificar el código existente. Además, si se quisiera agregar un nuevo criterio de distinción para los estudiantes, se podría crear una nueva clase que implemente la interfaz DistinctionDecider y agregarla al código sin necesidad de modificar las clases existentes. De esta manera, el código se vuelve más flexible y se pueden hacer cambios sin afectar la funcionalidad existente, lo que facilita su mantenimiento y extensión en el futuro.
+En este caso una de las ventajas sería que si se quisiera agregar un nuevo tipo de estudiante, como por ejemplo, un estudiante de negocios, se podría crear una nueva clase llamada `BusinessStudent` que implemente la interfaz `Estudiante` y agregarla a las listas de estudiantes sin necesidad de modificar el código existente. Además, si se quisiera agregar un nuevo criterio de distinción para los estudiantes, se podría crear una nueva clase que implemente la interfaz `DistinctionDecider` y agregarla al código sin necesidad de modificar las clases existentes. De esta manera, el código se vuelve más flexible y se pueden hacer cambios sin afectar la funcionalidad existente, lo que facilita su mantenimiento y extensión en el futuro.
 
 ## Principio de Sustitución de Liskov
 
