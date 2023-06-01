@@ -88,7 +88,7 @@ Proporciona algunos ejemplos de sistemas que podrían beneficiarse de una consid
 * Sistemas de comercio electrónico: En un sistema de comercio electrónico, la interfaz de usuario juega un papel fundamental en la experiencia del cliente. Una consideración más directa de la interfaz de usuario permitiría realizar pruebas de usabilidad, iterar en el diseño de la interfaz y optimizar la navegación para mejorar la experiencia de compra y aumentar las conversiones.
 * Sistemas de gestión de contenido: En los sistemas de gestión de contenido, como los CMS (Content Management Systems), es crucial que la interfaz de usuario sea intuitiva y fácil de usar para que los administradores y editores de contenido puedan agregar, editar y organizar el contenido de manera eficiente. Una consideración más directa de la interfaz de usuario permitiría realizar pruebas de usabilidad y realizar ajustes para mejorar la productividad de los usuarios.
 
-## Criterios de aceptación** 
+## Criterios de aceptación
 
 :question: **Pregunta**
 ### Planificación
