@@ -1,4 +1,4 @@
-## Hitorias de Usuarios y Criterios de Aceptación
+# Hitorias de Usuarios y Criterios de Aceptación
 
 Autor: `Jhonnatan Antonio Espinoza Rojas`
 
@@ -6,9 +6,11 @@ Archivo original: [Historias de Usuarios - Kapumota](https://github.com/kapumota
 
 Fecha de entrega: `10/04/23`
 
-### Historias de usuarios y criterios de aceptación
+## Historias de usuarios
 
-1 . ¿Cuáles de las siguientes no son buenas historias? ¿Por qué?
+:question: **Pregunta**
+
+¿Cuáles de las siguientes no son buenas historias? ¿Por qué?
 
 - El usuario puede ejecutar el sistema en Windows XP y Linux. 
 - Todos los gráficos y tablas se realizan utilizando una biblioteca de terceros. 
@@ -21,17 +23,19 @@ Fecha de entrega: `10/04/23`
 - El usuario puede seleccionar la función "Exportar a XML". 
 - El usuario puede exportar datos a XML
 
-**Respuestas**
+:white_check_mark: **Respuesta**
 
-- no
-- depende
-- si
-- no 
-- si rol/persona: usuario, objetivo: guardar el trabajo, beneficio: el usuario no se olvide de guardar su trabajo
-- si
-- si 
+* NO, Esta historia podría no ser ideal si Windows XP es una plataforma obsoleta o no compatible con las tecnologías y requisitos actuales.
+* DEPENDE, si la biblioteca de terceros no es confiable o no tiene buen mantenimiento podria ser desfavorable
+* NO, Esta historia no proporciona suficiente información para evaluar su calidad como una buena historia.
+* NO, Esta historia podría no ser ideal si Windows XP es una plataforma obsoleta o no compatible con las tecnologías y requisitos actuales.
+* SI, Esta historia es una medida prudente para evitar la pérdida de datos en caso de inactividad prolongada
+* SI, Esta historia parece una funcionalidad útil y no se observan inconvenientes evidentes
+* SI, Esta historia parece una funcionalidad útil y no se observan inconvenientes evidentes. 
 
-2 .  ¿Cuáles de las siguientes no son buenas historias? ¿Por qué?
+:question: **Pregunta**
+
+¿Cuáles de las siguientes no son buenas historias? ¿Por qué?
 
 - Un usuario puede dominar rápidamente el sistema. 
 - Un usuario puede editar la dirección en un currículum. 
@@ -39,100 +43,112 @@ Fecha de entrega: `10/04/23`
 - El sistema puede calcular aproximaciones de puntos de silla para distribuciones de formas cuadráticas en variables normales. 
 - Todos los errores de tiempo de ejecución se registran de manera coherente.
 
-**Respuestas**
+:white_check_mark: **Respuesta**
 
-- no
-- no
-- si
-- no 
-- no
+* NO, Esta historia no es específica en cuanto a qué se entiende por "dominar rápidamente" el sistema
+* SI, Esta historia parece ser una funcionalidad útil y no se observan inconvenientes evidentes.
+* SI, Esta historia parece una funcionalidad útil para un sistema de gestión de currículums
+* NO, Esta historia parece ser altamente técnica y específica de un campo o dominio de conocimiento particular.
+* NO, Registrar los errores de tiempo de ejecución de manera coherente es una buena práctica de desarrollo de software, pero no es una funcionalidad útil para el usuario final.
 
+:question: **Pregunta**
 
-3 . ¿Cuáles son cuatro buenas razones para usar historias de usuarios para expresar requisitos? 
+¿Cuáles son cuatro buenas razones para usar historias de usuarios para expresar requisitos? 
 
+:white_check_mark: **Respuesta**
 
-4 . ¿Cuáles pueden ser dos inconvenientes de usar historias de usuario? 
+* Enfoque centrado en el usuario
+* Comunicación clara y comprensible
+* Fomentar la colaboración
+* Flexibilidad y adaptabilidad
 
-En proyectos grandes puede ser dificil manejar cientos o miles de historias de usuarios entonces se tienen que hacer seguimientos (tracking).
+:question: **Pregunta**
 
-No es tan sencillo medir la eficacia de un proyecto con las historias de usuario.
+¿Cuáles pueden ser dos inconvenientes de usar historias de usuario? 
 
-5 . ¿Cómo debes manejar un requisito para que un sistema escale y lo usen 1000 usuarios simultáneos? 
+:white_check_mark: **Respuesta**
 
-Segmentando a los usuarios por grupos y creando historias de usuarios para esos grupos
+* En proyectos grandes puede ser dificil manejar cientos o miles de historias de usuarios entonces se tienen que hacer seguimientos (tracking).
+* No es tan sencillo medir la eficacia de un proyecto con las historias de usuario.
 
-6 . Proporciona algunos ejemplos de sistemas que podrían beneficiarse de una consideración más directa de la interfaz de usuario de lo que normalmente se da en un proyecto ágil.
+:question: **Pregunta**
 
+¿Cómo debes manejar un requisito para que un sistema escale y lo usen 1000 usuarios simultáneos? 
 
-7 . Imaginemos que tu y un amigo tienen una web de Pet Store y, durante este mes, presentan un 10% de descuento en la suscripción Premium. Entonces, cada vez que un usuario de una cuenta gratuita inicia sesión, se le muestra un mensaje que dice:
+:white_check_mark: **Respuesta**
 
-```
- ¡Suscríbete a Premium ahora con un 10 % de descuento!
+* Segmentando a los usuarios por grupos y creando historias de usuarios para esos grupos
 
-``` 
-En este punto y técnicamente hablando, queremos crear un punto final desde donde podamos obtener un descuento de suscripción para un usuario determinado.
+:question: **Pregunta**
 
-**Planificación**
+Proporciona algunos ejemplos de sistemas que podrían beneficiarse de una consideración más directa de la interfaz de usuario de lo que normalmente se da en un proyecto ágil.
 
+:white_check_mark: **Respuesta**
+
+* Sistemas de comercio electrónico: En un sistema de comercio electrónico, la interfaz de usuario juega un papel fundamental en la experiencia del cliente. Una consideración más directa de la interfaz de usuario permitiría realizar pruebas de usabilidad, iterar en el diseño de la interfaz y optimizar la navegación para mejorar la experiencia de compra y aumentar las conversiones.
+* Sistemas de gestión de contenido: En los sistemas de gestión de contenido, como los CMS (Content Management Systems), es crucial que la interfaz de usuario sea intuitiva y fácil de usar para que los administradores y editores de contenido puedan agregar, editar y organizar el contenido de manera eficiente. Una consideración más directa de la interfaz de usuario permitiría realizar pruebas de usabilidad y realizar ajustes para mejorar la productividad de los usuarios.
+
+## Criterios de aceptación** 
+
+:question: **Pregunta**
+### Planificación
 Tú eres el que crea este punto final! Comenzamos reuniendo y creando un ticket de trabajo. Allí, queremos asegurarnos de incluir un  criterios de aceptación. Cuando termines tu trabajo, le pasarás el boleto a tu amigo. El será responsable de probarlo y de asegurarse  de que la implementación  cubra todos los casos de uso que escribimos en esos criterios de aceptación. 
 
-Completa: 
-
-**Descripción** 
-
+### Descripcion
 ```
 Queremos crear un punto final en nuestra API que nos permita obtener el descuento disponible para un usuario determinado. 
 Más tarde, la interfaz de usuario manejará el valor de descuento recibido y proporcionará el mensaje. 
-
 ```
 
-**Criterios de aceptación** 
+:white_check_mark: **Respuesta**
 
-
-
-**Dado**
-
-**Cuando**
-
-**Entonces**
-
-8 .  Planificación de Poker
- 
+AC 1
 ```
-Grupos de 3 estudiantes 
-    Cartas  0, 1/2, 1, 2, 3, 5, 8, 13, 20, 40, 100, ∞ y ? 
- ```
-Estima el esfuerzo (en horas):
-
-```
-"Como jugador, necesito un tablero vacío de 3*3  para jugar un juego de TicTacToe".
-
+Dado que tengo acceso a la API y a un usuario determinado
+Cuando realice una solicitud al punto final de obtención de descuento
+Entonces la API deberá retornar el descuento disponible para ese usuario
 ```
 
-
-9 . Given-When-Then es un estilo de representación de pruebas, o como dirían sus defensores, especifica el comportamiento de un sistema utilizando [SpecificationByExample](https://en.wikipedia.org/wiki/Specification_by_example). Es un enfoque desarrollado por Daniel Terhorst-North y Chris Matts como parte del [Behavior-Driven Development (BDD)](https://en.wikipedia.org/wiki/Behavior-driven_development). Aparece como un enfoque de estructuración para muchos frameworks  de prueba como Cucumber. 
-
-También puedes verlo como una reformulación del [Four-Phase Test](https://medium.com/test-go-where/developing-automated-tests-with-the-four-phase-test-pattern-b5fe05c24c67) .
-
-Como estamos hablando de usar ejemplos como especificaciones, tiene sentido mostrar esto con un ejemplo: 
-
+AC 2
 ```
-Característica: el usuario negocia acciones 
-Escenario: el usuario solicita una venta antes del cierre de operaciones 
-   Dado que tengo 100 acciones de MSFT 
-     Y tengo 150 acciones de APPL 
-      Y el tiempo es antes del cierre de operaciones.
-     Cuando pido vender 20 acciones de MSFT 
-      
-      Entonces debería tener 80 acciones de MSFT 
-       Y debería tener 150 acciones de APPL
-        Y debería haberse ejecutado una orden de venta de 20 acciones de MSFT
-``` 
-El ejemplo anterior usa [Cucumber](https://cucumber.io/), que es una forma popular de escribir [BusinessFacingTest](https://www.martinfowler.com/bliki/BusinessFacingTest.html), pero puedes usar el estilo Given-When-Then con cualquier tipo de prueba. 
+Dado que el descuento disponible para el usuario es de un 10%
+Cuando la interfaz de usuario reciba el descuento proporcionado por la API
+Entonces la interfaz de usuario deberá mostrar el mensaje "¡Felicidades! Tienes un descuento del 10% en tu compra"
+```
 
-Encuentra más ejemplos usando Cucumber.
+AC 3
+```
+Dado que el descuento disponible para el usuario es de un 0%
+Cuando la interfaz de usuario reciba el descuento proporcionado por la API
+Entonces la interfaz de usuario deberá mostrar el mensaje "Lo sentimos, no tienes ningún descuento disponible en este momento"	
+```
 
-10 . ¿Prefieres escribir historias en tarjetas de notas o en un sistema de software? 
+AC 4
+```
+Dado que la solicitud al punto final de obtención de descuento se realiza sin autenticación o con credenciales inválidas
+Cuando se realice la solicitud
+Entonces la API deberá retornar un mensaje de error de autenticación o credenciales inválidas
+```
 
+AC 5
+```
+Dado que el usuario determinado no existe en la base de datos de usuarios
+Cuando se realice la solicitud al punto final de obtención de descuento
+Entonces la API deberá retornar un mensaje de error indicando que el usuario no existe
+```
 
+AC 6
+```
+Dado que ocurra un error interno en la API durante la obtención del descuento
+Cuando se realice la solicitud al punto final de obtención de descuento
+Entonces la API deberá retornar un mensaje de error interno y un código de estado apropiado
+```
+
+:question: **Pregunta**
+
+¿Prefieres escribir historias en tarjetas de notas o en un sistema de software? 
+
+:white_check_mark: **Respuesta**
+
+Prefiero hacerlo en un sistema de software porque es más fácil de manejar y de compartir con los demás.
 
