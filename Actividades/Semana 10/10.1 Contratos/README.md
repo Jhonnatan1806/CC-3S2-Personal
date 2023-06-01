@@ -10,7 +10,9 @@ Fecha de entrega: `29/05/23`
 
 ### Precondiciones y postcondiciones
 
-:question: Escribe el Javadoc del método calculateTax describiendo su contrato, de acuerdo al código anterior. Revisa el archivo `TaxCalculator.java`
+:question: **Pregunta**
+
+Escribe el Javadoc del método calculateTax describiendo su contrato, de acuerdo al código anterior. Revisa el archivo `TaxCalculator.java`
 
 :white_check_mark: **Respuesta**
 
@@ -39,7 +41,9 @@ public double calculateTax(double value) {
 
 ### La palabra clave assert
 
-:question: Escribe una versión de TaxCalculator usando asserts para ello completa el archivo `TaxCalculator1.java`
+:question: **Pregunta**
+
+Escribe una versión de TaxCalculator usando asserts para ello completa el archivo `TaxCalculator1.java`
 
 :white_check_mark: **Respuesta**
 
@@ -65,7 +69,9 @@ public double calculateTax(double value) {
 
 ## Precondiciones y postcondiciones fuertes y débiles
 
-:question: ¿Puedes aplicar el mismo razonamiento a las postcondiciones? , ¿como relacionas el siguiente listado que devuelve un código de error en lugar de una excepción?.
+:question: **Pregunta**
+
+¿Puedes aplicar el mismo razonamiento a las postcondiciones? , ¿como relacionas el siguiente listado que devuelve un código de error en lugar de una excepción?.
 
 :white_check_mark: **Respuesta**
 
@@ -75,7 +81,9 @@ public double calculateTax(double value) {
 
 ## Invariantes
 
-:question: Escribe para el método `add()` sus pre/postcondiciones.
+:question: **Pregunta**
+
+Escribe para el método `add()` sus pre/postcondiciones.
 
 :white_check_mark: **Respuesta**
 
@@ -112,7 +120,9 @@ public void add(Product product, int qtyToAdd) {
 }
 ```
 
-:question: Modela otra postcondiciones aquí, como el nuevo valor total debe ser mayor que el valor total anterior. Usa la clase `BigDecimal` en lugar de un `double`. `BigDecimal` se recomienda siempre que desees evitar problemas de redondeo que pueden ocurrir cuando usas `double`.
+:question: **Pregunta**
+
+Modela otra postcondiciones aquí, como el nuevo valor total debe ser mayor que el valor total anterior. Usa la clase `BigDecimal` en lugar de un `double`. `BigDecimal` se recomienda siempre que desees evitar problemas de redondeo que pueden ocurrir cuando usas `double`.
 
 :white_check_mark: **Respuesta**
 
@@ -153,7 +163,9 @@ public void add(Product product, int qtyToAdd) {
 }
 ```	
 
-:question: Escribe las pre/post condiciones del método remove().
+:question: **Pregunta**
+
+Escribe las pre/post condiciones del método `remove()`.
 
 :white_check_mark: **Respuesta**
 
@@ -194,7 +206,9 @@ public void remove(Product product) {
 }
 ```
 
-:question: Explica y completa el siguiente listado de invariantes de la clase Basket:
+:question: **Pregunta**
+
+Explica y completa el siguiente listado de invariantes de la clase Basket:
 
 :white_check_mark: **Respuesta**
 
@@ -241,7 +255,9 @@ public class Basket {
 }
 ```
 
-:question: ¿Qué función tiene el método `invariant()` en el siguiente listado?
+:question: **Pregunta**
+
+¿Qué función tiene el método `invariant()` en el siguiente listado?
 
 :white_check_mark: **Respuesta**
 

@@ -8,7 +8,9 @@ Fecha de entrega: `02/04/23`
 
 ## Principio de responsabilidad única - SRP
 
-:question: Realiza una salida de muestra. Ten en cuenta que la identificación(ID) de un empleado puede variar en tu caso porque genera un número aleatorio para obtener la identificación (ID) del empleado.
+:question: **Pregunta**
+
+Realiza una salida de muestra. Ten en cuenta que la identificación(ID) de un empleado puede variar en tu caso porque genera un número aleatorio para obtener la identificación (ID) del empleado.
 
 :white_check_mark: **Respuesta**
 
@@ -27,13 +29,17 @@ El ID del empleado es: C169
 Este empleado es un empleado junior
 ```
 
-:question: ¿Cuál es el problema con este diseño?
+:question: **Pregunta**
+
+¿Cuál es el problema con este diseño?
 
 :white_check_mark: **Respuesta**
 
 La clase Empleado tiene dos responsabilidades distintas, mostrar los detalles del empleado y generar el ID del empleado. En el método generateEmpId, estás generando el ID del empleado, pero también está actualizando el estado de la instancia de Empleado.
 
-:question: Demostracion con SRP.
+:question: **Pregunta**
+
+Demostracion con SRP.
 
 :white_check_mark: **Respuesta**
 
@@ -52,7 +58,9 @@ El id del empleado es: C596
 Este empleado es un empleado junior
 ```
 
-:question: Realiza una demostración completa que sigue a SRP. Explica los resultados
+:question: **Pregunta**
+
+Realiza una demostración completa que sigue a SRP. Explica los resultados
 
 :white_check_mark: **Respuesta**
 
@@ -65,13 +73,17 @@ Esto cumple con el principio de responsabilidad única, ya que cada clase tiene 
 
 ## Principio abierto/cerrado - OCP
 
-:question: Si entiendes el principio SRP mencionado anteriormente no querrás colocar displayResult() y evaluateDistinction() en la misma clase. ¿Por qué?.
+:question: **Pregunta**
+
+Si entiendes el principio SRP mencionado anteriormente no querrás colocar displayResult() y evaluateDistinction() en la misma clase. ¿Por qué?.
 
 :white_check_mark: **Respuesta**
 
 No se debería colocar `displayResult()` y `evaluateDistinction()` en la misma clase, ya que violaría el principio de SRP de SOLID. En este caso la clase Student tiene dos responsabilidades distintas, mostrar los detalles del estudiante y evaluar su distinción.
 
-:question: Realiza una salida de muestra.
+:question: **Pregunta**
+
+Realiza una salida de muestra.
 
 :white_check_mark: **Respuesta**
 
@@ -103,13 +115,17 @@ R1 ha recibido una distincion en ciencias.
 R3 ha recibido una distincion en artes.
 ```
 
-:question: Modifica el método de evaluateDistinction() y agrega otra instrucción if para considerar a los estudiantes de comercio. ¿Está bien modificar el método evaluateDistinction() de esta manera?.
+:question: **Pregunta**
+
+Modifica el método de evaluateDistinction() y agrega otra instrucción if para considerar a los estudiantes de comercio. ¿Está bien modificar el método evaluateDistinction() de esta manera?.
 
 :white_check_mark: **Respuesta**
 
 No está bien modificar el método `evaluateDistinction()`, ya que violaría el principio de Open-Closed (OCP) de SOLID. En este caso la modificación directa del método `evaluateDistinction()` para incluir a los estudiantes de comercio viola este principio, ya que si se agregara otra categoría en el futuro, se tendría que modificar nuevamente el método y se rompería el principio de OCP.
 
-:question: ¿Cuáles son las principales ventajas ahora?.
+:question: **Pregunta**
+
+¿Cuáles son las principales ventajas ahora?.
 
 :white_check_mark: **Respuesta**
 
@@ -117,7 +133,9 @@ En este caso una de las ventajas sería que si se quisiera agregar un nuevo tipo
 
 ## Principio de Sustitución de Liskov
 
-:question: Realiza una salida de muestra.
+:question: **Pregunta**
+
+Realiza una salida de muestra.
 
 :white_check_mark: **Respuesta**
 
@@ -134,7 +152,9 @@ Procesando de Chalito, la actual solicitud de pagos .
 ------
 ```
 
-:question: Dentro del método main(), ahora crea una instancia de usuario invitado e intenta usar su clase auxiliar de la misma manera.
+:question: **Pregunta**
+
+Dentro del método main(), ahora crea una instancia de usuario invitado e intenta usar su clase auxiliar de la misma manera.
 
 :white_check_mark: **Respuesta**
 
@@ -145,7 +165,9 @@ GuestUserPayment guestUser = new GuestUserPayment();
 helper.addUser(guestUser);
 ```
 
-:question: Realiza una salida de muestra y describe la excepción resultante. ¿Cuál es el problema?.
+:question: **Pregunta**
+
+Realiza una salida de muestra y describe la excepción resultante. ¿Cuál es el problema?.
 
 :white_check_mark: **Respuesta**
 
@@ -162,50 +184,74 @@ Exception in thread "main" java.lang.UnsupportedOperationException
 	at NoSolid.LSP.Cliente.main(Cliente.java:21)
 ```
 
-:question: Elimina el método newPayment() de la interfaz de payment. Coloca este método en otra interfaz llamada NewPayment. Ahora tienes dos interfaces con las operaciones específicas. Dado que todos los tipos de usuarios pueden generar una nueva solicitud de pago, las clases concretas de RegisteredUserPayment y GuestUserPayment implementan la interfaz NewPayment y muestran el último detalle de pago solo para los usuarios registrados. Así la clase RegisteredUser implementa la interfaz payment. Dado que Payment contiene el método previousPaymentInfo(), tiene sentido elegir un nombre mejor, como PreviousPayment en lugar de Payment. Entonces, ahora deberías ver las siguientes interfaces:
+:question: **Pregunta**
+
+Elimina el método newPayment() de la interfaz de payment. Coloca este método en otra interfaz llamada NewPayment. Ahora tienes dos interfaces con las operaciones específicas. Dado que todos los tipos de usuarios pueden generar una nueva solicitud de pago, las clases concretas de RegisteredUserPayment y GuestUserPayment implementan la interfaz NewPayment y muestran el último detalle de pago solo para los usuarios registrados. Así la clase RegisteredUser implementa la interfaz payment. Dado que Payment contiene el método previousPaymentInfo(), tiene sentido elegir un nombre mejor, como PreviousPayment en lugar de Payment. Entonces, ahora deberías ver las siguientes interfaces:
 
 :white_check_mark: **Respuesta**
 
-:question: ¿cuáles son los cambios clave?. Explica tus resultados.
+:question: **Pregunta**
+
+¿cuáles son los cambios clave?. Explica tus resultados.
 
 :white_check_mark: **Respuesta**
 
 ## Principio de segregación de interfaz
 
-:question: En este caso ISP sugiere que diseñes tu interfaz con los métodos adecuados que un cliente en particular pueda necesitar. ¿Por qué un usuario necesita cambiar una clase base (o una interfaz)?
+:question: **Pregunta**
+
+En este caso ISP sugiere que diseñes tu interfaz con los métodos adecuados que un cliente en particular pueda necesitar. ¿Por qué un usuario necesita cambiar una clase base (o una interfaz)?
 
 :white_check_mark: **Respuesta**
 
-:question: ¿Ayuda escribir código polimórfico como el siguiente?. Explica tu respuesta.
+:question: **Pregunta**
+
+¿Ayuda escribir código polimórfico como el siguiente?. Explica tu respuesta.
 
 :white_check_mark: **Respuesta**
 
-:question: ¿Qué sucede si escribimos algo así en el código dado?
+:question: **Pregunta**
+
+¿Qué sucede si escribimos algo así en el código dado?
 
 :white_check_mark: **Respuesta**
 
-:question: Realiza una salida de muestra
+:question: **Pregunta**
+
+Realiza una salida de muestra
 
 :white_check_mark: **Respuesta**
 
-:question: ¿Qué sucede si usas un método predeterminado dentro de la interfaz?
+:question: **Pregunta**
+
+¿Qué sucede si usas un método predeterminado dentro de la interfaz?
 
 :white_check_mark: **Respuesta**
 
-:question: ¿Viste el problema potencial con esto! . Pero, ¿qué sucede si usas un método vacío, en lugar de lanzar la excepción?.
+:question: **Pregunta**
+
+¿Viste el problema potencial con esto! . Pero, ¿qué sucede si usas un método vacío, en lugar de lanzar la excepción?.
 
 ## Principio de inversión de dependencias
 
-:question: Realiza una salida de muestra. ¿Cuáles son los problemas que adolece el código?
+:question: **Pregunta**
+
+Realiza una salida de muestra. ¿Cuáles son los problemas que adolece el código?
 
 :white_check_mark: **Respuesta**
 
-:question: Puedes ver que en la demostración, el constructor de la clase InterfazUsuario acepta un parámetro de base de datos. Puedes proporcionar una instalación adicional a un usuario cuando utilizas tanto el constructor como el método setter (setDatabase) dentro de esta clase. Aquí hay un código de muestra.
+:question: **Pregunta**
+
+Puedes ver que en la demostración, el constructor de la clase InterfazUsuario acepta un parámetro de base de datos. Puedes proporcionar una instalación adicional a un usuario cuando utilizas tanto el constructor como el método setter (setDatabase) dentro de esta clase. Aquí hay un código de muestra.
 
 :white_check_mark: **Respuesta**
 
-:question: ¿Cuál es el beneficio de hacer esto?.
+:question: **Pregunta**
+
+¿Cuál es el beneficio de hacer esto?.
 
 :white_check_mark: **Respuesta**
 
-:question: Verifica tus resultados.
+:question: **Pregunta**
+
+Verifica tus resultados.

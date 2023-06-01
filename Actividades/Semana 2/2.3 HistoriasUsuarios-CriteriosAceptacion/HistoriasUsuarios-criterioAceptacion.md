@@ -1,10 +1,8 @@
-## Hitorias de Usuarios y Criterios de Aceptación
+## Curso de desarrollo de software
 
-Autor: `Jhonnatan Antonio Espinoza Rojas`
+**Indicaciones**
 
-Archivo original: [Historias de Usuarios - Kapumota](https://github.com/kapumota/Actividades/blob/main/HistoriasUsuarios-criterioAceptacion.md)
-
-Fecha de entrega: `10/04/23`
+Inicia un repositorio llamado CC-3S2 y dentro una carpeta llamada Actividades. Dentro de esta carpeta abre una carpeta llamada HistoriasUsuarios-CriteriosAceptacion y coloca todas tus respuestas.
 
 ### Historias de usuarios y criterios de aceptación
 
@@ -17,19 +15,10 @@ Fecha de entrega: `10/04/23`
 - El software estará escrito en Java. 
 - El usuario puede seleccionar su país de una lista desplegable. 
 - El sistema utilizará Log4J para registrar todos los mensajes de error en un archivo. 
-- Se te pedirá al usuario que guarde su trabajo si no lo ha guardado durante 15 minutos. 
+- Se le pedirá al usuario que guarde su trabajo si no lo ha guardado durante 15 minutos. 
 - El usuario puede seleccionar la función "Exportar a XML". 
 - El usuario puede exportar datos a XML
 
-**Respuestas**
-
-- no
-- depende
-- si
-- no 
-- si rol/persona: usuario, objetivo: guardar el trabajo, beneficio: el usuario no se olvide de guardar su trabajo
-- si
-- si 
 
 2 .  ¿Cuáles de las siguientes no son buenas historias? ¿Por qué?
 
@@ -39,27 +28,14 @@ Fecha de entrega: `10/04/23`
 - El sistema puede calcular aproximaciones de puntos de silla para distribuciones de formas cuadráticas en variables normales. 
 - Todos los errores de tiempo de ejecución se registran de manera coherente.
 
-**Respuestas**
-
-- no
-- no
-- si
-- no 
-- no
-
-
 3 . ¿Cuáles son cuatro buenas razones para usar historias de usuarios para expresar requisitos? 
 
 
 4 . ¿Cuáles pueden ser dos inconvenientes de usar historias de usuario? 
 
-En proyectos grandes puede ser dificil manejar cientos o miles de historias de usuarios entonces se tienen que hacer seguimientos (tracking).
 
-No es tan sencillo medir la eficacia de un proyecto con las historias de usuario.
+5 . ¿Cómo debes manejar un requisito para que un sistema escale y  lo usen 1000 usuarios simultáneos? 
 
-5 . ¿Cómo debes manejar un requisito para que un sistema escale y lo usen 1000 usuarios simultáneos? 
-
-Segmentando a los usuarios por grupos y creando historias de usuarios para esos grupos
 
 6 . Proporciona algunos ejemplos de sistemas que podrían beneficiarse de una consideración más directa de la interfaz de usuario de lo que normalmente se da en un proyecto ágil.
 
@@ -72,13 +48,13 @@ Segmentando a los usuarios por grupos y creando historias de usuarios para esos 
 ``` 
 En este punto y técnicamente hablando, queremos crear un punto final desde donde podamos obtener un descuento de suscripción para un usuario determinado.
 
-**Planificación**
+`Planificación`
 
 Tú eres el que crea este punto final! Comenzamos reuniendo y creando un ticket de trabajo. Allí, queremos asegurarnos de incluir un  criterios de aceptación. Cuando termines tu trabajo, le pasarás el boleto a tu amigo. El será responsable de probarlo y de asegurarse  de que la implementación  cubra todos los casos de uso que escribimos en esos criterios de aceptación. 
 
 Completa: 
 
-**Descripción** 
+`Descripción` 
 
 ```
 Queremos crear un punto final en nuestra API que nos permita obtener el descuento disponible para un usuario determinado. 
@@ -86,15 +62,13 @@ Más tarde, la interfaz de usuario manejará el valor de descuento recibido y pr
 
 ```
 
-**Criterios de aceptación** 
+`Criterios de aceptación` 
 
+`Dado`
 
+`Cuando`
 
-**Dado**
-
-**Cuando**
-
-**Entonces**
+`Entonces`
 
 8 .  Planificación de Poker
  
