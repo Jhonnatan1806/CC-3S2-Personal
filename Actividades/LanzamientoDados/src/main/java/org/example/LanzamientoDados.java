@@ -7,7 +7,7 @@ public class LanzamientoDados{
     // instanciamos la interface NumerosAlatorios
     private final NumerosAleatorios rnd ;
 
-    // el constructor recibe el pseudonumero aleatorio
+    // el constructor recibe el numero aleatorio
     public LanzamientoDados(NumerosAleatorios r){
         this.rnd = r;
     }
