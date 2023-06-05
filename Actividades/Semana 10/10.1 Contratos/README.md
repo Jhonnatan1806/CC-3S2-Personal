@@ -88,8 +88,8 @@ Escribe para el método `add()` sus pre/postcondiciones.
 
 Precondiciones
 
-* El parámetro `product` no debe ser nulo.
-* El parámetro `qtyToAdd` debe ser un número entero positivo mayor que cero.
+* El parametro `product` no debe ser nulo.
+* El parametro `qtyToAdd` debe ser un número entero positivo mayor que cero.
 
 Postcondiciones
 
@@ -101,11 +101,11 @@ Postcondiciones
 public void add(Product product, int qtyToAdd) {
     // Precondiciones
     if (product == null) {
-        throw new IllegalArgumentException("El producto no puede ser nulo.");
+        throw new RuntimeException("El producto no puede ser nulo.");
     }
 
     if (qtyToAdd <= 0) {
-        throw new IllegalArgumentException("La cantidad a agregar debe ser un numero entero positivo mayor que cero.");
+        throw new RuntimeException("La cantidad a agregar debe ser un numero entero positivo mayor que cero.");
     }
 
     // Postcondiciones
