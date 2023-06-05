@@ -1,5 +1,3 @@
-package org.example;
-import java.util.random.RandomGenerator;
 public class LanzamientoDados{
     private final int NUMERO_DE_LADOS = 6;
    //private final RandomGenerator rnd = RandomGenerator.getDefault();

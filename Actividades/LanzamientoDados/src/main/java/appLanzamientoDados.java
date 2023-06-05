@@ -1,5 +1,3 @@
-package org.example;
-
 public class appLanzamientoDados {
     public static void main(String[] args) {
         new appLanzamientoDados().run();

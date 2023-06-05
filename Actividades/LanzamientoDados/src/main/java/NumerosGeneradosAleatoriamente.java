@@ -1,5 +1,3 @@
-package org.example;
-
 import java.util.random.RandomGenerator;
 
 public class NumerosGeneradosAleatoriamente implements NumerosAleatorios
