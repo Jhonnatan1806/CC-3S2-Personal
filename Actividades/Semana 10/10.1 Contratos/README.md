@@ -77,7 +77,6 @@ public double calculateTax(double value) {
 
 * Si, se puede aplicar el mismo razonamiento a las postcondiciones. Al igual que las precondiciones, las postcondiciones pueden ser mas debiles o mas fuertes, dependiendo de como se definan y como afecten al comportamiento del metodo, pero en este caso se evalua el resultado de la funcion, en lugar de los parametros de entrada.
 
-* En el codigo proporcionado, el metodo `calculateTax` devuelve un codigo de error (el valor 0) en lugar de lanzar una excepcion si se viola la precondicion de que `value` sea un numero positivo. Esta es una forma de debilitar la postcondición del método. La debilitación de la postcondición en este caso permite que el método devuelva algún valor, incluso cuando la precondición no se cumple. En lugar de detener el programa o lanzar una excepción, se proporciona un resultado "dummy" (valor 0) para indicar que se violó la precondición.
 
 ## Invariantes
 
