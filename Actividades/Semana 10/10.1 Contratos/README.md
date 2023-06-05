@@ -75,7 +75,7 @@ public double calculateTax(double value) {
 
 :white_check_mark: **Respuesta**
 
-* Si, se puede aplicar el mismo razonamiento a las postcondiciones. Al igual que las precondiciones, las postcondiciones pueden ser mas debiles o mas fuertes, dependiendo de como se definan y como afecten al comportamiento del metodo, pero en este caso se evalua el resultado de la funcion, en lugar de los parametros de entrada.
+* Si, se puede aplicar el mismo razonamiento a las postcondiciones. Las postcondiciones pueden ser mas debiles o mas fuertes, dependiendo de como se definan y como afecten al comportamiento del metodo, pero en este caso se evalua el resultado de la funcion, en lugar de los parametros de entrada.
 
 
 ## Invariantes
