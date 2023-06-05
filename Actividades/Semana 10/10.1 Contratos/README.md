@@ -67,7 +67,7 @@ public double calculateTax(double value) {
 }
 ```
 
-## Precondiciones y postcondiciones fuertes y débiles
+## Precondiciones y postcondiciones fuertes y debiles
 
 :question: **Pregunta**
 
@@ -75,9 +75,9 @@ public double calculateTax(double value) {
 
 :white_check_mark: **Respuesta**
 
-* Si, se puede aplicar el mismo razonamiento a las postcondiciones. Al igual que las precondiciones, las postcondiciones pueden ser más débiles o más fuertes, dependiendo de cómo se definan y cómo afecten al comportamiento del método, pero en este caso se evalua el resultado de la función, en lugar de los parámetros de entrada.
+* Si, se puede aplicar el mismo razonamiento a las postcondiciones. Al igual que las precondiciones, las postcondiciones pueden ser mas debiles o mas fuertes, dependiendo de como se definan y como afecten al comportamiento del metodo, pero en este caso se evalua el resultado de la funcion, en lugar de los parametros de entrada.
 
-* En el código proporcionado, el método `calculateTax` devuelve un código de error (el valor 0) en lugar de lanzar una excepción si se viola la precondición de que value sea un número positivo. Esta es una forma de debilitar la postcondición del método. La debilitación de la postcondición en este caso permite que el método devuelva algún valor, incluso cuando la precondición no se cumple. En lugar de detener el programa o lanzar una excepción, se proporciona un resultado "dummy" (valor 0) para indicar que se violó la precondición.
+* En el codigo proporcionado, el metodo `calculateTax` devuelve un codigo de error (el valor 0) en lugar de lanzar una excepcion si se viola la precondicion de que `value` sea un numero positivo. Esta es una forma de debilitar la postcondición del método. La debilitación de la postcondición en este caso permite que el método devuelva algún valor, incluso cuando la precondición no se cumple. En lugar de detener el programa o lanzar una excepción, se proporciona un resultado "dummy" (valor 0) para indicar que se violó la precondición.
 
 ## Invariantes
 
@@ -217,8 +217,8 @@ Invariante 1
 * Explicación: El método `add()` no permite agregar un producto nulo o una cantidad negativa al carrito.
 
 Invariante 2
-* Invariante: El producto debe existir en el carrito antes de su eliminación.
-* Explicación: El método `remove()` verifica que el producto a eliminar exista en el carrito antes de su eliminación.
+* Invariante: El producto debe existir en el carrito antes de su eliminacion.
+* Explicación: El método `remove()` verifica que el producto a eliminar exista en el carrito antes de su eliminacion.
 
 Invariante 3
 * Invariante: Después de agregar un producto, el valor total del carrito debe ser mayor que el valor total anterior.
@@ -261,4 +261,4 @@ public class Basket {
 
 :white_check_mark: **Respuesta**
 
-El método `invariant()` tiene la función de verificar si se cumple que el valor total del carrito nunca puede ser negativo.
+El metodo `invariant()` tiene la funcion de verificar si se cumple que el valor total del carrito nunca puede ser negativo.
