@@ -258,6 +258,21 @@ public class Basket {
 
 ¿Qué función tiene el método `invariant()` en el siguiente listado?
 
+```java
+ public void add(Product product, int qtyToAdd) {
+         // ... metodos ...
+             assert invariant() : "...";
+         }
+          public void remove(Product product) {
+                 // ... metodos ...
+           assert invariant() : "...";
+      }
+           private boolean invariant() {
+              return totalValue.compareTo(BigDecimal.ZERO) >= 0;
+         }
+}
+```
+
 :white_check_mark: **Respuesta**
 
 El metodo `invariant()` tiene la funcion de verificar si se cumple que el valor total del carrito nunca puede ser negativo.
