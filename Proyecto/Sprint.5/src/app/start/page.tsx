@@ -312,11 +312,11 @@ export default function GamePlay() {
                                                 demo
                                                     ? undefined
                                                     : () =>
-                                                          handleWriteCell(
-                                                              rowIndex,
-                                                              columnIndex,
-                                                              letter
-                                                          )
+                                                        handleWriteCell(
+                                                            rowIndex,
+                                                            columnIndex,
+                                                            letter
+                                                        )
                                             }
                                             key={columnIndex}
                                             className={`border border-slate-200 bg-white text-2xl font-bold`}

@@ -17,7 +17,7 @@ export default function ButtonBack() {
 	const router = useRouter();
 
 	function goBack() {
-		router.back();
+		router.push("/");
 	}
 
 	return (
