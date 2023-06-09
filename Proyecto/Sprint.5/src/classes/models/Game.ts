@@ -1,6 +1,9 @@
-import { Mode } from "@/classes/enums/Mode";
 import { Board } from "@/classes/models/Board";
 import { Player } from "@/classes/models/Player";
+import { Difficulty } from "@/classes/enums/Difficulty";
+import { GameType } from "@/classes/enums/GameType";
+import { GameMode } from "../enums/GameMode";
+
 
 /**
  * @class Game
@@ -8,26 +11,47 @@ import { Player } from "@/classes/models/Player";
  */
 export class Game {
 	private board: Board;
-	private mode: Mode;
-	private players: Player[];
+    private players: Player[];
+    private difficulty: Difficulty;
+	private gameType: GameType;
+    private size: number;
 
 	/**
 	 * Crea un juego de SOS.
 	 *
 	 * @constructor
-	 * @param {Board} board - El tablero del juego.
-	 * @param {Mode} mode - El modo del juego.
-	 * @param {Player[]} players - Los jugadores del juego.
 	 */
 	constructor(
-		board: Board,
-    players: Player[],
-		mode: Mode = Mode.SIMPLE_GAME
+        size: number | undefined,
+        type: string | undefined,
+        mode: string | undefined,
+        difficulty: string | undefined,
 	) {
-		this.board = board;
-		this.mode = mode;
-		this.players = players;
+        this.size = size || 3;
+		this.board = new Board(size,size);
+        this.gameType = type === "General" ? GameType.GENERAL_GAME : GameType.SIMPLE_GAME;
+        if(mode === GameMode.PVC) {
+            this.players = [ new Player("ROJO"), new Player("AZUL",true)];
+        }else if(mode === GameMode.CVC){
+            this.players = [ new Player("ROJO",true), new Player("AZUL",true)];
+        }
+        else{
+            this.players = [ new Player("ROJO"), new Player("AZUL")];
+        }
+        if(difficulty === "Intermedio"){
+            this.difficulty = Difficulty.MEDIUM;
+        }else if(difficulty === "Dificil"){
+            this.difficulty = Difficulty.HARD;
+        }
+        else{
+            this.difficulty = Difficulty.EASY;
+        }
+
 	}
+
+    public setBoard(board: Board ): void {
+        this.board = board;
+    }
 
 	/**
 	 * Retorna el tablero del juego.
@@ -43,8 +67,8 @@ export class Game {
 	 *
 	 * @returns {Mode} El modo del juego.
 	 */
-	public getMode(): Mode {
-		return this.mode;
+	public getGameMode(): GameType {
+		return this.gameType;
 	}
 
 	/**
@@ -57,21 +81,16 @@ export class Game {
 	}
 
     /**
-     * Cambia el tablero del juego.
+     * Retorna la dificultad del juego.
      * 
-     * @param {Board} board - El nuevo tablero del juego.
+     * @returns {Difficulty} La dificultad del juego.
      */
-    public setBoard(board: Board): void {
-        this.board = board;
+    public getDifficulty(): Difficulty {
+        return this.difficulty;
     }
 
-    /**
-     * Cambia el modo del juego.
-     * 
-     * @param {Mode} mode - El nuevo modo del juego.
-     */
-    public setMode(mode: Mode): void {
-        this.mode = mode;
+    public getSize(): number {
+        return this.size;
     }
 
 }

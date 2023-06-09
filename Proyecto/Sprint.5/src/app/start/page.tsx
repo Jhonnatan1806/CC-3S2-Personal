@@ -70,6 +70,7 @@ export default function GamePlay() {
     useEffect(() => {
         if (gameState !== GameState.PLAYING) {
             setModalOpen(true);
+            setDisabledButton(false);
         }
     }, [gameState]);
 
@@ -186,9 +187,9 @@ export default function GamePlay() {
         router.push("/");
     };
 
-    const handleSaveGame = () => {
-        setDisabledButton(false);
+    const handleExitGame = () => {
         setModalOpen(false);
+        handleHome();
     };
 
     const handleNewGame = () => {
@@ -202,6 +203,10 @@ export default function GamePlay() {
         }
     };
 
+    const handleCloseModal = () => {
+        setModalOpen(false);
+    };
+
     const gameWinner = gameController?.getWinner() ?? GameWinner.NONE;
     const currentTurn = gameController?.getCurrentPlayer().getName() ?? "ROJO";
     const scores = [
@@ -212,7 +217,7 @@ export default function GamePlay() {
     return (
         <>
             {modalOpen ? (
-                <Modal>
+                <Modal onClose={handleCloseModal}>
                     <Flex className="flex-col items-center gap-4">
                         <p>RESULTADOS</p>
                         <p className="font-bold">{gameWinner}</p>
@@ -223,9 +228,9 @@ export default function GamePlay() {
                                 NUEVO JUEGO
                             </button>
                             <button
-                                className="w-fit bg-red-500 px-6 py-2 rounded font-bold text-white"
-                                onClick={handleSaveGame}>
-                                GUARDAR JUEGO
+                                className="w-fit bg-slate-400 px-6 py-2 rounded font-bold text-white"
+                                onClick={handleExitGame}>
+                                SALIR
                             </button>
                         </Flex>
                     </Flex>

@@ -1,116 +1,203 @@
 import { Letter } from "@/classes/enums/Letter";
-import { IMoveGenerator } from "@/classes/utils/IMoveGenerator";
-import { Computer } from "@/classes/models/Computer";
+import { MoveGenerator } from "@/classes/utils/MoveGenerator";
 import { Player } from "@/classes/models/Player";
 import { CheckWinner } from "@/classes/utils/CheckWinner";
 import { Game } from "@/classes/models/Game";
-import { Mode } from "../enums/Mode";
-import { Human } from "../models/Human";
+import { GameType } from "@/classes/enums/GameType";
+import { GameState } from "@/classes/enums/GameState";
+import { GameWinner } from "@/classes/enums/GameWinner";
+import { Line } from "@/classes/models/Line";
+import { Record } from "@/classes/models/Record";
 
 /**
- * @class Game
- * @classdesc Representa un juego de SOS.
+ * @class GameController
+ * @classdesc Controla el juego de SOS.
  */
 export class GameController {
-	private game: Game;
-	private currentPlayer: Human | Computer;
-	private isGameOver: boolean;
-	private currentPlayerIndex: number;
+    private game: Game;
+    private gameState: GameState;
+    private gameWinner: GameWinner;
+    private currentPlayerIndex: number;
+    private lastSOSLine: Line | null;
+    private record: Record;
 
-	/**
-	 * Crea un juego de SOS.
-	 *
-	 * @constructor
-	 * @param {Game} game - El juego.
-	 */
-	constructor(game: Game) {
-		this.game = game;
-		this.currentPlayer = game.getPlayers()[0];
-		this.isGameOver = false;
-		this.currentPlayerIndex = 0;
-	}
+    /**
+     * Crea un juego de SOS.
+     *
+     * @constructor
+     * @param {Game} game - El juego.
+     */
+    constructor(game: Game) {
+        this.game = game;
+        this.gameState = GameState.PLAYING;
+        this.gameWinner = GameWinner.NONE;
+        this.currentPlayerIndex = 0;
+        this.lastSOSLine = null;
+        this.record = new Record();
+    }
 
     /**
      * Retorna el juego.
-     * 
-     * @returns {Game} El juego. 
+     *
+     * @returns {Game} El juego.
      */
     public getGame(): Game {
         return this.game;
     }
 
-	/**
-	 * Retorna el jugador actual.
-	 *
-	 * @returns {Player} El jugador actual.
-	 */
-	public getCurrentPlayer(): Player {
-		return this.currentPlayer;
-	}
+    public getSize(): number {
+        return this.game.getBoard().getRows();
+    }
 
-	/**
-	 * Cambia el jugador actual al siguiente jugador en la lista de jugadores.
-	 */
-	private changeCurrentPlayer(): void {
-		this.currentPlayerIndex =
-			(this.currentPlayerIndex + 1) % this.game.getPlayers().length;
-	}
+    /**
+     * Retorna el jugador actual.
+     *
+     * @returns {Player} El jugador actual.
+     */
+    public getCurrentPlayer(): Player {
+        return this.game.getPlayers()[this.currentPlayerIndex];
+    }
 
-	/**
-	 * Retorna `true` si el juego ha terminado.
-	 *
-	 * @returns {boolean} `true` si el juego ha terminado, `false` en caso contrario.
-	 */
-	public getGameOver(): boolean {
-		return this.isGameOver;
-	}
+    /**
+     * Cambia el jugador actual al siguiente jugador en la lista de jugadores.
+     */
+    public changeCurrentPlayer(): void {
+        this.currentPlayerIndex =
+            (this.currentPlayerIndex + 1) % this.game.getPlayers().length;
+    }
 
-	/**
-	 * Retorna el jugador ganador del juego.
-	 *
-	 * @throws Error si hay empate.
-	 * @returns {Player} El jugador ganador.
-	 */
-	public getWinner(): Player {
-		const player1 = this.game.getPlayers()[0];
-		const player2 = this.game.getPlayers()[1];
-		const scorePlayer1 = player1.getScore().getPoints();
-		const scorePlayer2 = player2.getScore().getPoints();
-		if (scorePlayer1 === scorePlayer2) {
-			throw new Error("Draw.");
-		}
-		return scorePlayer1 > scorePlayer2 ? player1 : player2;
-	}
+    /**
+     * Retorna `true` si el juego ha terminado.
+     *
+     * @returns {GameState} `true` si el juego ha terminado, `false` en caso contrario.
+     */
+    public getGameState(): GameState {
+        return this.gameState;
+    }
 
-	/**
-	 * Realiza un movimiento en el tablero.
-	 *
-	 * @param {number} row - La fila donde se realizará el movimiento.
-	 * @param {number} column - La columna donde se realizará el movimiento.
-	 * @param {string} letter - La letra que se colocará en la posición especificada.
-	 */
-	public makeMove(row: number, column: number, letter: Letter): void {
-		const board = this.game.getBoard();
-		const mode = this.game.getMode();
-		board.setCell(row, column, letter);
-		const points = new CheckWinner(board, mode).checkBoard();
-		this.currentPlayer.getScore().addPoints(points);
-        if ( this.game.getBoard().isFull() || (points > 0 && mode === Mode.SIMPLE_GAME) ) {
-            this.isGameOver = true;
+    /**
+     * Retorna el jugador ganador del juego.
+     *
+     * @returns {Player} El jugador ganador.
+     * @throws Error si hay empate.
+     */
+    public getWinner(): GameWinner {
+        const scorePlayer1 = this.game.getPlayers()[0].getScore().getPoints();
+        const scorePlayer2 = this.game.getPlayers()[1].getScore().getPoints();
+        if (scorePlayer1 === scorePlayer2) {
+            this.gameWinner = GameWinner.TIE;
         }
-		this.changeCurrentPlayer();
-	}
+        if (scorePlayer1 > scorePlayer2) {
+            this.gameWinner = GameWinner.WINNER_PLAYER1;
+        }
+        if (scorePlayer1 < scorePlayer2) {
+            this.gameWinner = GameWinner.WINNER_PLAYER2;
+        }
+        return this.gameWinner;
+    }
+
+    /**
+     * Realiza un movimiento en el tablero.
+     *
+     * @param {number} row - La fila donde se realizará el movimiento.
+     * @param {number} column - La columna donde se realizará el movimiento.
+     * @param {string} letter - La letra que se colocará en la posición especificada.
+     */
+    public makeMove(row: number, column: number, letter: Letter): boolean {
+        const board = this.game.getBoard();
+        if (
+            this.gameState === GameState.FINISHED ||
+            board.getCell(row, column) !== Letter.EMPTY
+        ) {
+            return false;
+        }
+        board.setCell(row, column, letter);
+        this.record.addBoard(board.clone());
+        return true;
+    }
 
     /**
      * Realiza un movimiento de la Computadora en el tablero.
      */
-	public imakeMove(): void {
+    public botMove(): [number, number, Letter] {
         const board = this.game.getBoard();
-        if (this.currentPlayer instanceof Computer) {
-            const computer = this.currentPlayer;
-            const [row, col, letter]: [number, number, Letter] =
-                new IMoveGenerator().generateMove(board, computer)!;
-            this.makeMove(row, col, letter);
+        const [row, col, letter] = MoveGenerator.getMovement(
+            board,
+            this.game.getDifficulty()
+        );
+        return [row, col, letter];
+    }
+
+    public checkSOS(row: number, column: number): boolean {
+        const board = this.game.getBoard();
+        if (board.isFull()) {
+            this.gameState = GameState.FINISHED;
+            return false;
         }
-	}
+        const mode = this.game.getGameMode();
+        const checkWinner = new CheckWinner(board, mode, row, column);
+        const points = checkWinner.checkBoard();
+        this.getCurrentPlayer().getScore().addPoints(points);
+        if (points > 0 && mode === GameType.SIMPLE_GAME) {
+            this.gameState = GameState.FINISHED;
+            this.updateLastSOSLine(checkWinner.getLine());
+            return true;
+        }
+        return false;
+    }
+
+    public getCompletedSOSLines(): Line[] {
+        const board = this.game.getBoard();
+        const completedLines: Line[] = [];
+
+        for (let row = 0; row < board.getRows(); row++) {
+            for (let col = 0; col < board.getColumns(); col++) {
+                const checkWinner = new CheckWinner(
+                    board,
+                    this.game.getGameMode(),
+                    row,
+                    col
+                );
+                const points = checkWinner.checkBoard();
+                if (points > 0) {
+                    const line: Line = {
+                        startRow: row,
+                        startColumn: col,
+                        endRow: checkWinner.getEndRow(),
+                        endColumn: checkWinner.getEndColumn(),
+                    };
+                    completedLines.push(line);
+                }
+            }
+        }
+
+        return completedLines;
+    }
+
+    /**
+     * Retorna la última línea de SOS completada durante el juego.
+     *
+     * @returns {Line | null} La última línea de SOS completada o null si no hay ninguna.
+     */
+    public getLastSOSLine(): Line | null {
+        return this.lastSOSLine;
+    }
+
+    public updateLastSOSLine(line: Line): void {
+        this.lastSOSLine = line;
+    }
+
+    public resetGame(): void {
+        this.game.getBoard().reset();
+        this.game.getPlayers()[0].getScore().reset();
+        this.game.getPlayers()[1].getScore().reset();
+        this.gameState = GameState.PLAYING;
+        this.gameWinner = GameWinner.NONE;
+        this.currentPlayerIndex = 0;
+        this.lastSOSLine = null;
+    }
+
+    public getRecord(): Record {
+        return this.record;
+    }
 }

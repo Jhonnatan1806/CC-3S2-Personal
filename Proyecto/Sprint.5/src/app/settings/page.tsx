@@ -5,7 +5,9 @@ import ButtonBack from "@/components/core/ButtonBack";
 import Flex from "@/components/core/Flex";
 import Layout from "@/components/core/Layout";
 import Switch from "@/components/core/Switch";
+import Modal from "@/components/core/Modal";
 import { useGameContext } from "@/hooks/useContextGame";
+import { FaSadTear } from "react-icons/fa";
 
 
 export default function SettingGame() {
@@ -15,6 +17,7 @@ export default function SettingGame() {
     const [gameType, setGameType] = useState<string>("Simple");
     const [gameMode, setGameMode] = useState<string>("PvP");
     const [gameDifficulty, setGameDifficulty] = useState<string>("Fácil");
+    const [modal, setModal] = useState(false);
     
 	function handleDecrement() {
 		if (gameSize > 3) {
@@ -45,11 +48,27 @@ export default function SettingGame() {
         gameContext?.setGameType(gameType);
         gameContext?.setGameMode(gameMode);
         gameContext?.setGameDifficulty(gameDifficulty);
+        if(gameType === "General"){
+            setModal(true);
+            return;
+        };
         router.push("/start");
+    };
+
+    const handleCloseModal = () => {
+        setModal(false);
     };
     
 	return (
 		<>
+            {
+                modal && <Modal onClose={handleCloseModal}>
+                    <Flex className="flex-col flex-wrap items-center py-4 gap-4 text-slate-700">
+                        <FaSadTear size={48}/>
+                        <p>Lo sentimos el tipo de juego <strong>General</strong> aún no se encuentra implementado.</p>
+                    </Flex>
+                </Modal>
+            }
 			<Layout>
 				<Flex className="flex-col grow">
 					<ButtonBack />

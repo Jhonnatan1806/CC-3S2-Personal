@@ -1,5 +1,3 @@
-import { Letter } from "@/classes/enums/Letter";
-
 /**
  * @class Board
  * @classdesc Representa un tablero de juego.
@@ -7,7 +5,7 @@ import { Letter } from "@/classes/enums/Letter";
 export class Board {
 	private readonly rows: number;
 	private readonly columns: number;
-	private readonly grid: Letter[][];
+	private readonly grid: string[][];
 
 	/**
 	 * Crear un tablero de juego.
@@ -22,7 +20,7 @@ export class Board {
 		this.grid = new Array(this.rows);
 		this.grid = new Array(rows)
 			.fill(null)
-			.map(() => new Array(columns).fill(Letter.EMPTY));
+			.map(() => new Array(columns).fill(""));
 	}
 
 	/**
@@ -46,9 +44,9 @@ export class Board {
 	/**
 	 * Retorna el tablero de juego.
      * 
-	 * @returns {Letter[][]} Tablero de juego.
+	 * @returns {string[][]} Tablero de juego.
 	 */
-	public getGrid(): Letter[][] {
+	public getGrid(): string[][] {
 		return this.grid;
 	}
 
@@ -77,7 +75,7 @@ export class Board {
 	 * @param {number} column Posición de la columna.
 	 * @param {Letter} value Valor a asignar.
 	 */
-	public setCell(row: number, column: number, value: Letter): void {
+	public setCell(row: number, column: number, value: string): void {
 		this.grid[row][column] = value;
 	}
 
@@ -91,5 +89,23 @@ export class Board {
 	public getCell(row: number, column: number): string {
 		return this.grid[row][column];
 	}
+
+    public reset(): void {
+        for (let row = 0; row < this.rows; row++) {
+            for (let column = 0; column < this.columns; column++) {
+                this.setCell(row, column, "");
+            }
+        }
+    }
+
+    public clone(): Board {
+        const cloneBoard = new Board(this.rows, this.columns);
+        for (let row = 0; row < this.rows; row++) {
+            for (let column = 0; column < this.columns; column++) {
+                cloneBoard.setCell(row, column, this.getCell(row, column));
+            }
+        }
+        return cloneBoard;
+    }
 
 }

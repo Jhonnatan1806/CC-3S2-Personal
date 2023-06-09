@@ -7,6 +7,7 @@ import { Score } from "@/classes/models/Score";
 export class Player {
 	private readonly name: string;
 	private readonly score: Score;
+    private readonly bot: boolean;
 
 	/**
 	 * Crea una instancia de la clase Player.
@@ -14,9 +15,10 @@ export class Player {
 	 * @constructor
 	 * @param {string} name - El nombre del jugador.
 	 */
-	constructor(name: string) {
+	constructor(name: string, bot: boolean = false) {
 		this.name = name;
 		this.score = new Score();
+        this.bot = bot;
 	}
 
 	/**
@@ -35,5 +37,9 @@ export class Player {
 	public getScore(): Score {
 		return this.score;
 	}
+
+    public isBot(): boolean {
+        return this.bot;
+    }
 
 }

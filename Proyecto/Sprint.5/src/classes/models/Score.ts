@@ -40,4 +40,8 @@ export class Score {
 	public getPoints(): number {
 		return this.points;
 	}
+
+    public reset(): void {
+        this.points = 0;
+    }
 }
