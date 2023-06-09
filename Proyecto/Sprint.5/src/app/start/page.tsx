@@ -10,7 +10,7 @@ import Modal from "@/components/core/Modal";
 
 //context
 import { useGameContext } from "@/hooks/useContextGame";
-import { FaCog, FaHome } from "react-icons/fa";
+import { FaCog, FaHome, FaRedo } from "react-icons/fa";
 
 //controllers
 import { GameController } from "@/classes/controllers/GameController";
@@ -63,7 +63,6 @@ export default function GamePlay() {
             setTimeout(() => {
                 handleDemoCell();
             }, 500);
-            
         }
     }, [gameController]);
 
@@ -81,7 +80,7 @@ export default function GamePlay() {
             const sizeBox = 390 / gameSize;
             const widthLine =
                 angleLine === 45 || angleLine === 135
-                    ? 3 * sizeBox
+                    ? 2.8 * sizeBox
                     : 2 * sizeBox;
             const heightLine = 4;
             const leftOffset = 2;
@@ -128,16 +127,8 @@ export default function GamePlay() {
     const completeSOS = (row: number, column: number) => {
         const completedSOS = gameController?.checkSOS(row, column);
         if (completedSOS) {
-            const line = gameController?.getLastSOSLine();
-            setListLine([
-                ...listLines,
-                line ?? {
-                    startRow: 0,
-                    startColumn: 0,
-                    endRow: 0,
-                    endColumn: 0,
-                },
-            ]);
+            const lines = gameController?.getCompletedSOSLines();
+            setListLine(lines ?? []);
         }
     };
 
@@ -145,12 +136,15 @@ export default function GamePlay() {
         if (gameController?.getGameState() !== GameState.PLAYING) {
             return;
         }
-        const [row, col, letter] = gameController?.botMove() ?? [0, 0, Letter.S];
+        const [row, col, letter] = gameController?.botMove() ?? [
+            0,
+            0,
+            Letter.S,
+        ];
         setTimeout(() => {
             handleWriteCell(row, col, letter);
         }, 500);
     };
-
 
     const handleWriteCell = (row: number, column: number, letter: Letter) => {
         const moveCompleted = gameController?.makeMove(row, column, letter);
@@ -238,17 +232,25 @@ export default function GamePlay() {
             ) : null}
             <Layout>
                 <Flex className="flex-col gap-4 text-slate-700 h-screen">
-                    <Flex className="flex-row justify-between text-3xl gap-4">
+                    <Flex className="flex-row justify-between text-3xl">
                         <button
                             className="flex justify-start gap-2"
                             onClick={handleGameSettings}>
                             <FaCog />
                         </button>
-                        <button
-                            className="flex justify-end gap-2"
-                            onClick={handleHome}>
-                            <FaHome />
-                        </button>
+                        <div className="flex gap-4">
+                            <button
+                                className="flex justify-center disabled:text-slate-400 gap-2"
+                                onClick={handleNewGame}
+                                disabled={disabledButton}>
+                                <FaRedo />
+                            </button>
+                            <button
+                                className="flex justify-end gap-2"
+                                onClick={handleHome}>
+                                <FaHome />
+                            </button>
+                        </div>
                     </Flex>
                     <Flex className="flex-col flex-grow justify-center gap-6">
                         <div className="flex flex-row items-center justify-center font-bold text-center gap-4 select-none">

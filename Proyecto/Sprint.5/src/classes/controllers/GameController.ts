@@ -18,7 +18,7 @@ export class GameController {
     private gameState: GameState;
     private gameWinner: GameWinner;
     private currentPlayerIndex: number;
-    private lastSOSLine: Line | null;
+    private completedLines: Line[];
     private record: Record;
 
     /**
@@ -32,7 +32,7 @@ export class GameController {
         this.gameState = GameState.PLAYING;
         this.gameWinner = GameWinner.NONE;
         this.currentPlayerIndex = 0;
-        this.lastSOSLine = null;
+        this.completedLines = [];
         this.record = new Record();
     }
 
@@ -140,51 +140,26 @@ export class GameController {
         this.getCurrentPlayer().getScore().addPoints(points);
         if (points > 0 && mode === GameType.SIMPLE_GAME) {
             this.gameState = GameState.FINISHED;
-            this.updateLastSOSLine(checkWinner.getLine());
+            const lines = checkWinner.getLines();
+            for (const line of lines) {
+                this.addSOSLine(line);
+            }
             return true;
         }
         return false;
     }
 
-    public getCompletedSOSLines(): Line[] {
-        const board = this.game.getBoard();
-        const completedLines: Line[] = [];
-
-        for (let row = 0; row < board.getRows(); row++) {
-            for (let col = 0; col < board.getColumns(); col++) {
-                const checkWinner = new CheckWinner(
-                    board,
-                    this.game.getGameMode(),
-                    row,
-                    col
-                );
-                const points = checkWinner.checkBoard();
-                if (points > 0) {
-                    const line: Line = {
-                        startRow: row,
-                        startColumn: col,
-                        endRow: checkWinner.getEndRow(),
-                        endColumn: checkWinner.getEndColumn(),
-                    };
-                    completedLines.push(line);
-                }
-            }
-        }
-
-        return completedLines;
-    }
-
     /**
      * Retorna la última línea de SOS completada durante el juego.
      *
-     * @returns {Line | null} La última línea de SOS completada o null si no hay ninguna.
+     * @returns {Line} La última línea de SOS completada o null si no hay ninguna.
      */
-    public getLastSOSLine(): Line | null {
-        return this.lastSOSLine;
+    public getCompletedSOSLines(): Line[] {
+        return this.completedLines;
     }
 
-    public updateLastSOSLine(line: Line): void {
-        this.lastSOSLine = line;
+    private addSOSLine(line: Line) {
+        this.completedLines.push(line);
     }
 
     public resetGame(): void {
@@ -194,7 +169,7 @@ export class GameController {
         this.gameState = GameState.PLAYING;
         this.gameWinner = GameWinner.NONE;
         this.currentPlayerIndex = 0;
-        this.lastSOSLine = null;
+        this.completedLines = [];
     }
 
     public getRecord(): Record {

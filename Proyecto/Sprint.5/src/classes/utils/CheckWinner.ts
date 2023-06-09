@@ -9,10 +9,7 @@ export class CheckWinner {
     private win: Letter[] = [Letter.S, Letter.O, Letter.S];
     private currentRow: number;
     private currentColumn: number;
-    private startRow: number;
-    private startColumn: number;
-    private endRow: number;
-    private endColumn: number;
+    private lines: Line[];
 
     constructor(
         board: Board,
@@ -24,10 +21,7 @@ export class CheckWinner {
         this.gameType = gameType;
         this.currentRow = currentRow;
         this.currentColumn = currentColumn;
-        this.startRow = 0;
-        this.startColumn = 0;
-        this.endRow = 0;
-        this.endColumn = 0;
+        this.lines = [];
     }
 
     public checkBoard(): number {
@@ -41,11 +35,15 @@ export class CheckWinner {
     }
 
     private checkSimpleGame(): number {
+        const checkHorizontal = this.checkHorizontal( this.currentRow, this.currentColumn);
+        const checkVertical = this.checkVertical(this.currentRow, this.currentColumn);
+        const checkDiagonal = this.checkDiagonal(this.currentRow, this.currentColumn);
+        const checkReverseDiagonal = this.checkReverseDiagonal(this.currentRow, this.currentColumn);
         if (
-            this.checkHorizontal(this.currentRow, this.currentColumn) ||
-            this.checkVertical(this.currentRow, this.currentColumn) ||
-            this.checkDiagonal(this.currentRow, this.currentColumn) ||
-            this.checkReverseDiagonal(this.currentRow, this.currentColumn)
+            checkHorizontal ||
+            checkVertical ||
+            checkDiagonal ||
+            checkReverseDiagonal
         ) {
             return 1;
         }
@@ -74,10 +72,7 @@ export class CheckWinner {
                             j <= currentColumn &&
                             currentColumn <= j + 2)
                     ) {
-                        this.startRow = i;
-                        this.startColumn = j;
-                        this.endRow = i;
-                        this.endColumn = j + 2;
+                        this.lines.push({startRow:i, startColumn:j, endRow:i, endColumn:j + 2});
                         return true;
                     }
                 }
@@ -105,10 +100,8 @@ export class CheckWinner {
                             currentRow <= i + 2 &&
                             j === currentColumn)
                     ) {
-                        this.startRow = i;
-                        this.startColumn = j;
-                        this.endRow = i + 2;
-                        this.endColumn = j;
+                        console.log("Vertical");
+                        this.lines.push({startRow:i, startColumn:j, endRow:i + 2, endColumn:j});
                         return true;
                     }
                 }
@@ -138,10 +131,8 @@ export class CheckWinner {
                             j <= currentColumn &&
                             currentColumn <= j + 2)
                     ) {
-                        this.startRow = i;
-                        this.startColumn = j;
-                        this.endRow = i + 2;
-                        this.endColumn = j + 2;
+                        console.log("Diagonal");
+                        this.lines.push({startRow:i, startColumn:j, endRow:i + 2, endColumn:j+2});
                         return true;
                     }
                 }
@@ -174,10 +165,7 @@ export class CheckWinner {
                             j - 2 <= currentColumn &&
                             currentColumn <= j)
                     ) {
-                        this.startRow = i;
-                        this.startColumn = j;
-                        this.endRow = i + 2;
-                        this.endColumn = j - 2;
+                        this.lines.push({startRow:i, startColumn:j, endRow:i + 2, endColumn:j-2});
                         return true;
                     }
                 }
@@ -186,28 +174,7 @@ export class CheckWinner {
         return false;
     }
 
-    public getStartRow(): number {
-        return this.startRow;
-    }
-
-    public getStartColumn(): number {
-        return this.startColumn;
-    }
-
-    public getEndRow(): number {
-        return this.endRow;
-    }
-
-    public getEndColumn(): number {
-        return this.endColumn;
-    }
-
-    public getLine(): Line {
-        return {
-            startRow: this.startRow,
-            startColumn: this.startColumn,
-            endRow: this.endRow,
-            endColumn: this.endColumn,
-        };
+    public getLines(): Line[] {
+        return this.lines;
     }
 }
