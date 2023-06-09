@@ -130,10 +130,6 @@ export class GameController {
 
     public checkSOS(row: number, column: number): boolean {
         const board = this.game.getBoard();
-        if (board.isFull()) {
-            this.gameState = GameState.FINISHED;
-            return false;
-        }
         const mode = this.game.getGameMode();
         const checkWinner = new CheckWinner(board, mode, row, column);
         const points = checkWinner.checkBoard();
@@ -145,6 +141,9 @@ export class GameController {
                 this.addSOSLine(line);
             }
             return true;
+        }
+        if (board.isFull()) {
+            this.gameState = GameState.FINISHED;
         }
         return false;
     }

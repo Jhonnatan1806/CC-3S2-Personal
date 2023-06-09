@@ -35,25 +35,39 @@ export class CheckWinner {
     }
 
     private checkSimpleGame(): number {
-        const checkHorizontal = this.checkHorizontal( this.currentRow, this.currentColumn);
-        const checkVertical = this.checkVertical(this.currentRow, this.currentColumn);
-        const checkDiagonal = this.checkDiagonal(this.currentRow, this.currentColumn);
-        const checkReverseDiagonal = this.checkReverseDiagonal(this.currentRow, this.currentColumn);
+        const checkHorizontal = this.checkHorizontal(
+            this.currentRow,
+            this.currentColumn
+        );
+        const checkVertical = this.checkVertical(
+            this.currentRow,
+            this.currentColumn
+        );
+        const checkDiagonal = this.checkDiagonal(
+            this.currentRow,
+            this.currentColumn
+        );
+        const checkReverseDiagonal = this.checkReverseDiagonal(
+            this.currentRow,
+            this.currentColumn
+        );
         if (
-            checkHorizontal ||
-            checkVertical ||
-            checkDiagonal ||
-            checkReverseDiagonal
+            checkHorizontal === 1 ||
+            checkVertical === 1 ||
+            checkDiagonal === 1 ||
+            checkReverseDiagonal === 1
         ) {
-            return 1;
+            return (
+                checkHorizontal +
+                checkVertical +
+                checkDiagonal +
+                checkReverseDiagonal
+            );
         }
         return 0;
     }
 
-    private checkHorizontal(
-        currentRow: number,
-        currentColumn: number
-    ): boolean {
+    private checkHorizontal(currentRow: number, currentColumn: number): number {
         const maxRows = this.board.getRows();
         const maxColumns = this.board.getColumns();
 
@@ -72,16 +86,21 @@ export class CheckWinner {
                             j <= currentColumn &&
                             currentColumn <= j + 2)
                     ) {
-                        this.lines.push({startRow:i, startColumn:j, endRow:i, endColumn:j + 2});
-                        return true;
+                        this.lines.push({
+                            startRow: i,
+                            startColumn: j,
+                            endRow: i,
+                            endColumn: j + 2,
+                        });
+                        return 1;
                     }
                 }
             }
         }
-        return false;
+        return 0;
     }
 
-    private checkVertical(currentRow: number, currentColumn: number): boolean {
+    private checkVertical(currentRow: number, currentColumn: number): number {
         const maxRows = this.board.getRows();
         const maxColumns = this.board.getColumns();
 
@@ -101,16 +120,21 @@ export class CheckWinner {
                             j === currentColumn)
                     ) {
                         console.log("Vertical");
-                        this.lines.push({startRow:i, startColumn:j, endRow:i + 2, endColumn:j});
-                        return true;
+                        this.lines.push({
+                            startRow: i,
+                            startColumn: j,
+                            endRow: i + 2,
+                            endColumn: j,
+                        });
+                        return 1;
                     }
                 }
             }
         }
-        return false;
+        return 0;
     }
 
-    private checkDiagonal(currentRow: number, currentColumn: number): boolean {
+    private checkDiagonal(currentRow: number, currentColumn: number): number {
         const maxRows = this.board.getRows();
         const maxColumns = this.board.getColumns();
 
@@ -132,19 +156,24 @@ export class CheckWinner {
                             currentColumn <= j + 2)
                     ) {
                         console.log("Diagonal");
-                        this.lines.push({startRow:i, startColumn:j, endRow:i + 2, endColumn:j+2});
-                        return true;
+                        this.lines.push({
+                            startRow: i,
+                            startColumn: j,
+                            endRow: i + 2,
+                            endColumn: j + 2,
+                        });
+                        return 1;
                     }
                 }
             }
         }
-        return false;
+        return 0;
     }
 
     private checkReverseDiagonal(
         currentRow: number,
         currentColumn: number
-    ): boolean {
+    ): number {
         const maxRows = this.board.getRows();
         const maxColumns = this.board.getColumns();
 
@@ -165,13 +194,18 @@ export class CheckWinner {
                             j - 2 <= currentColumn &&
                             currentColumn <= j)
                     ) {
-                        this.lines.push({startRow:i, startColumn:j, endRow:i + 2, endColumn:j-2});
-                        return true;
+                        this.lines.push({
+                            startRow: i,
+                            startColumn: j,
+                            endRow: i + 2,
+                            endColumn: j - 2,
+                        });
+                        return 1;
                     }
                 }
             }
         }
-        return false;
+        return 0;
     }
 
     public getLines(): Line[] {
