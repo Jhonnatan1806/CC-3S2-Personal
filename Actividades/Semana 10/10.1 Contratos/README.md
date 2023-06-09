@@ -67,7 +67,7 @@ public double calculateTax(double value) {
 }
 ```
 
-## Precondiciones y postcondiciones fuertes y débiles
+## Precondiciones y postcondiciones fuertes y debiles
 
 :question: **Pregunta**
 
@@ -75,9 +75,8 @@ public double calculateTax(double value) {
 
 :white_check_mark: **Respuesta**
 
-* Si, se puede aplicar el mismo razonamiento a las postcondiciones. Al igual que las precondiciones, las postcondiciones pueden ser más débiles o más fuertes, dependiendo de cómo se definan y cómo afecten al comportamiento del método, pero en este caso se evalua el resultado de la función, en lugar de los parámetros de entrada.
+* Si, se puede aplicar el mismo razonamiento a las postcondiciones. Las postcondiciones pueden ser mas debiles o mas fuertes, dependiendo de como se definan y como afecten al comportamiento del metodo, pero en este caso se evalua el resultado de la funcion, en lugar de los parametros de entrada.
 
-* En el código proporcionado, el método `calculateTax` devuelve un código de error (el valor 0) en lugar de lanzar una excepción si se viola la precondición de que value sea un número positivo. Esta es una forma de debilitar la postcondición del método. La debilitación de la postcondición en este caso permite que el método devuelva algún valor, incluso cuando la precondición no se cumple. En lugar de detener el programa o lanzar una excepción, se proporciona un resultado "dummy" (valor 0) para indicar que se violó la precondición.
 
 ## Invariantes
 
@@ -89,8 +88,8 @@ Escribe para el método `add()` sus pre/postcondiciones.
 
 Precondiciones
 
-* El parámetro `product` no debe ser nulo.
-* El parámetro `qtyToAdd` debe ser un número entero positivo mayor que cero.
+* El parametro `product` no debe ser nulo.
+* El parametro `qtyToAdd` debe ser un número entero positivo mayor que cero.
 
 Postcondiciones
 
@@ -102,11 +101,11 @@ Postcondiciones
 public void add(Product product, int qtyToAdd) {
     // Precondiciones
     if (product == null) {
-        throw new IllegalArgumentException("El producto no puede ser nulo.");
+        throw new RuntimeException("El producto no puede ser nulo.");
     }
 
     if (qtyToAdd <= 0) {
-        throw new IllegalArgumentException("La cantidad a agregar debe ser un numero entero positivo mayor que cero.");
+        throw new RuntimeException("La cantidad a agregar debe ser un numero entero positivo mayor que cero.");
     }
 
     // Postcondiciones
@@ -139,11 +138,11 @@ Estas nuevas postcondiciones aseguran que el producto se agrega correctamente al
 public void add(Product product, int qtyToAdd) {
     // Precondiciones
     if (product == null) {
-        throw new IllegalArgumentException("El producto no puede ser nulo.");
+        throw new RuntimeException("El producto no puede ser nulo.");
     }
 
     if (qtyToAdd <= 0) {
-        throw new IllegalArgumentException("La cantidad a agregar debe ser un numero entero positivo mayor que cero.");
+        throw new RuntimeException("La cantidad a agregar debe ser un numero entero positivo mayor que cero.");
     }
 
     // Postcondiciones
@@ -171,7 +170,7 @@ Escribe las pre/post condiciones del método `remove()`.
 
 Precondiciones
 
-* El parámetro `product` no debe ser nulo.
+* El parametro `product` no debe ser nulo.
 * El producto debe existir en el carrito de compras.
 
 Postcondiciones
@@ -185,11 +184,11 @@ Postcondiciones
 public void remove(Product product) {
     // Precondiciones
     if (product == null) {
-        throw new IllegalArgumentException("El producto no puede ser nulo.");
+        throw new RuntimeException("El producto no puede ser nulo.");
     }
 
     if (!basket.containsKey(product)) {
-        throw new IllegalArgumentException("El producto no existe en el carrito.");
+        throw new RuntimeException("El producto no existe en el carrito.");
     }
 
     // Postcondiciones
@@ -214,19 +213,19 @@ Explica y completa el siguiente listado de invariantes de la clase Basket:
 
 Invariante 1
 * Invariante: El producto y la cantidad a agregar no pueden ser nulos o negativos
-* Explicación: El método `add()` no permite agregar un producto nulo o una cantidad negativa al carrito.
+* Explicación: El metodo `add()` no permite agregar un producto nulo o una cantidad negativa al carrito.
 
 Invariante 2
-* Invariante: El producto debe existir en el carrito antes de su eliminación.
-* Explicación: El método `remove()` verifica que el producto a eliminar exista en el carrito antes de su eliminación.
+* Invariante: El producto debe existir en el carrito antes de su eliminacion.
+* Explicación: El metodo `remove()` verifica que el producto a eliminar exista en el carrito antes de su eliminacion.
 
 Invariante 3
 * Invariante: Después de agregar un producto, el valor total del carrito debe ser mayor que el valor total anterior.
-* Explicación: El método `add()` realiza una comparación entre el nuevo valor total y el valor total anterior, asegurando que el nuevo valor total sea mayor.
+* Explicación: El metodo `add()` realiza una comparación entre el nuevo valor total y el valor total anterior, asegurando que el nuevo valor total sea mayor.
 
 Invariante 4
 * Invariante: El valor total del carrito nunca puede ser negativo.
-* Explicación: Tanto en el método add() como en el método remove(), se verifica que el valor total del carrito no sea negativo después de realizar las operaciones correspondientes.
+* Explicación: Tanto en el metodo add() como en el metodo remove(), se verifica que el valor total del carrito no sea negativo después de realizar las operaciones correspondientes.
 
 Completando el código:
 ```java
@@ -259,6 +258,21 @@ public class Basket {
 
 ¿Qué función tiene el método `invariant()` en el siguiente listado?
 
+```java
+ public void add(Product product, int qtyToAdd) {
+         // ... metodos ...
+             assert invariant() : "...";
+         }
+          public void remove(Product product) {
+                 // ... metodos ...
+           assert invariant() : "...";
+      }
+           private boolean invariant() {
+              return totalValue.compareTo(BigDecimal.ZERO) >= 0;
+         }
+}
+```
+
 :white_check_mark: **Respuesta**
 
-El método `invariant()` tiene la función de verificar si se cumple que el valor total del carrito nunca puede ser negativo.
+El metodo `invariant()` tiene la funcion de verificar si se cumple que el valor total del carrito nunca puede ser negativo.
