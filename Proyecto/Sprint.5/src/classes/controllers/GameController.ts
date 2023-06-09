@@ -112,7 +112,7 @@ export class GameController {
             return false;
         }
         board.setCell(row, column, letter);
-        this.record.addBoard(board.clone());
+        this.record.addMovement(row, column, letter);
         return true;
     }
 
@@ -165,6 +165,7 @@ export class GameController {
         this.game.getBoard().reset();
         this.game.getPlayers()[0].getScore().reset();
         this.game.getPlayers()[1].getScore().reset();
+        this.record.reset();
         this.gameState = GameState.PLAYING;
         this.gameWinner = GameWinner.NONE;
         this.currentPlayerIndex = 0;

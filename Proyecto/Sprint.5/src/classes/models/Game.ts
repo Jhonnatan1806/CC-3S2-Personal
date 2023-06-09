@@ -49,10 +49,6 @@ export class Game {
 
 	}
 
-    public setBoard(board: Board ): void {
-        this.board = board;
-    }
-
 	/**
 	 * Retorna el tablero del juego.
 	 *

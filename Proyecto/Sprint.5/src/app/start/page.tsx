@@ -35,6 +35,7 @@ export default function GamePlay() {
     const [gameController, setGameController] = useState<GameController>();
     const [gameState, setGameState] = useState<GameState>(GameState.PLAYING);
     const [listLines, setListLine] = useState<Line[]>([]);
+    const [recordPlay, setRecordPlay] = useState<boolean>(false);
     const gridColumns = {
         gridTemplateColumns: `repeat(${gameSize}, minmax(0, 1fr))`,
     };
@@ -146,6 +147,18 @@ export default function GamePlay() {
         }, 500);
     };
 
+    const handleBotMove = () => {
+        if (
+            gameContext?.gameMode !== GameMode.PVP &&
+            gameController?.getCurrentPlayer().isBot()
+        ) {
+            const [row, col, letter] = gameController?.botMove();
+            setTimeout(() => {
+                handleWriteCell(row, col, letter);
+            }, 500);
+        }
+    };
+
     const handleWriteCell = (row: number, column: number, letter: Letter) => {
         const moveCompleted = gameController?.makeMove(row, column, letter);
         if (!moveCompleted) {
@@ -158,15 +171,10 @@ export default function GamePlay() {
             return;
         }
         updateTurn();
-        if (
-            gameContext?.gameMode !== GameMode.PVP &&
-            gameController?.getCurrentPlayer().isBot()
-        ) {
-            const [row, col, letter] = gameController?.botMove();
-            setTimeout(() => {
-                handleWriteCell(row, col, letter);
-            }, 500);
+        if (recordPlay) {
+            return;
         }
+        handleBotMove();
     };
 
     const handleLetterChange = (option: string) => {
@@ -199,6 +207,27 @@ export default function GamePlay() {
 
     const handleCloseModal = () => {
         setModalOpen(false);
+    };
+
+    const handlePlay = () => {
+        const record = gameController?.getRecord().getClone() ?? null;
+        setRecordPlay(true);
+        handleNewGame();
+        console.log(record);
+        if (record) {
+            const movements = record.getMovements();
+            for (let i = 0; i < movements.length; i++) {
+                const movement = movements[i];
+                setTimeout(() => {
+                    handleWriteCell(
+                        movement.row,
+                        movement.column,
+                        movement.letter
+                    );
+                }, i * 500);
+            }
+            setRecordPlay(false);
+        }
     };
 
     const gameWinner = gameController?.getWinner() ?? GameWinner.NONE;
@@ -283,11 +312,11 @@ export default function GamePlay() {
                                                 demo
                                                     ? undefined
                                                     : () =>
-                                                        handleWriteCell(
-                                                            rowIndex,
-                                                            columnIndex,
-                                                            letter
-                                                        )
+                                                          handleWriteCell(
+                                                              rowIndex,
+                                                              columnIndex,
+                                                              letter
+                                                          )
                                             }
                                             key={columnIndex}
                                             className={`border border-slate-200 bg-white text-2xl font-bold`}
@@ -309,6 +338,7 @@ export default function GamePlay() {
                             />
                             <button
                                 className="bg-blue-500 text-white px-6 py-2 rounded font-bold disabled:bg-slate-400"
+                                onClick={handlePlay}
                                 disabled={disabledButton}>
                                 REPRODUCIR
                             </button>

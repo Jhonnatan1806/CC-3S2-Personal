@@ -1,26 +1,29 @@
-import { Board } from "@/classes/models/Board";
+import { Movement } from "@/classes/models/Movement";
+import { Letter } from "@/classes/enums/Letter";
 
 export class Record {
 
-    private boards: Board[];
+    private movements: Movement[];
 
     constructor() {
-        this.boards = [];
+        this.movements = [];
     }
 
-    getBoard(index: number) {
-        return this.boards[index];
+    getMovements() {
+        return this.movements;
     }
 
-    getBoards() {
-        return this.boards;
+    getClone() {
+        const clone = new Record();
+        clone.movements = this.movements.slice();
+        return clone;
     }
 
-    addBoard(board: Board) {
-        this.boards.push(board);
+    addMovement(row:number, column:number, letter:Letter) {
+        this.movements.push({row, column, letter});
     }
 
-    removeLastBoard() {
-        this.boards.pop();
+    reset() {
+        this.movements = [];
     }
 }
