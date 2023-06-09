@@ -213,7 +213,7 @@ export default function GamePlay() {
             {modalOpen ? (
                 <Modal onClose={handleCloseModal}>
                     <Flex className="flex-col items-center gap-4">
-                        <p>RESULTADOS</p>
+                        <p>RESULTADO</p>
                         <p className="font-bold">{gameWinner}</p>
                         <Flex className="gap-4 flex-wrap text-sm md:text-base">
                             <button

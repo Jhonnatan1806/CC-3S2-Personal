@@ -119,7 +119,6 @@ export class CheckWinner {
                             currentRow <= i + 2 &&
                             j === currentColumn)
                     ) {
-                        console.log("Vertical");
                         this.lines.push({
                             startRow: i,
                             startColumn: j,
@@ -155,7 +154,6 @@ export class CheckWinner {
                             j <= currentColumn &&
                             currentColumn <= j + 2)
                     ) {
-                        console.log("Diagonal");
                         this.lines.push({
                             startRow: i,
                             startColumn: j,
