@@ -25,7 +25,7 @@ Procedemos a crear la clase FacturaDAO que implementa:
 
 * getConnection(): Connection - Retorna una conexión a la base de datos
 * closeConnection(): void - Cierra la conexión a la base de datos
-* cleanTable(): void - Elimina la tabla facturas si existe y la vuelve a crear
+* resetDatabase(): void - Elimina la tabla facturas si existe y la vuelve a crear
 * guardar(Factura factura): void - Guarda una factura en la base de datos
 * todo(): List<Factura> - Retorna todas las facturas de la base de datos
 * todosConAlMenos(int value): List<Factura> - Retorna todas las facturas de la base de datos con un valor mayor o igual a value
@@ -200,7 +200,7 @@ class FacturaDAOIntegracionTest {
     @BeforeEach
     void openConnectionAndCleanup() throws SQLException {
         facturaDAO = new FacturaDAO();
-        facturaDAO.cleanTable();
+        facturaDAO.resetDatabase();
     }
 
     @AfterEach
@@ -275,7 +275,7 @@ public abstract class SQLIntegrationTestBase {
     @BeforeEach
     void openConnectionAndCleanup() throws SQLException {
         facturaDAO = new FacturaDAO();
-        facturaDAO.cleanTable();
+        facturaDAO.resetDatabase();
     }
 
     @AfterEach
