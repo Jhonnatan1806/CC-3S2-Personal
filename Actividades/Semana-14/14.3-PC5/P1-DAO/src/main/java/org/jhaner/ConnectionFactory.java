@@ -2,15 +2,19 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class ConnectionSQL {
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class ConnectionFactory {
     String driverClassName = "com.mysql.jdbc.Driver";
     String connectionUrl = "jdbc:mysql://localhost:3306/factura";
     String dbUser = "root";
-    String dbPwd = "123456";
+    String dbPwd = "root";
 
-    private static ConnectionSQL connectionSQL = null;
+    private static ConnectionFactory connectionFactory = null;
 
-    private ConnectionSQL() {
+    private ConnectionFactory() {
         try {
             Class.forName(driverClassName);
         } catch (ClassNotFoundException e) {
@@ -24,10 +28,10 @@ public class ConnectionSQL {
         return conn;
     }
 
-    public static ConnectionSQL getInstance() {
-        if (connectionSQL == null) {
-            connectionSQL = new ConnectionSQL();
+    public static ConnectionFactory getInstance() {
+        if (connectionFactory == null) {
+            connectionFactory = new ConnectionFactory();
         }
-        return connectionSQL;
+        return connectionFactory;
     }
 }

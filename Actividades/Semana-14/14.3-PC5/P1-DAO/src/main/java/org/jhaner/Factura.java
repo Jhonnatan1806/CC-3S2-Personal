@@ -26,7 +26,12 @@ public class Factura {
                 ", valor=" + valor +
                 '}';
     }
-    public int obtenerValor() {
-        return valor;
+
+    public int getValor() {
+        return this.valor;
+    }
+
+    public String getCliente(){
+        return this.cliente
     }
 }

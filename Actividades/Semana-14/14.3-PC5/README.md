@@ -60,9 +60,18 @@ public class FacturaDAO{
         conn = ConnectionFactory.getInstance().getConnection();
         return conn;
     }
+    
+    private void closeConnection(){
+        if (resultSet != null)
+            resultSet.close();
+        if (ptmt != null)
+            ptmt.close();
+        if (connection != null)
+            connection.close();
+    }
 
     public void guardar(Factura factura) {
-    try {
+        try {
             String queryString = "INSERT INTO factura (nombre, valor) VALORES(?,?)";
             connection = getConnection();
             ptmt = connection.prepareStatement(queryString);
@@ -72,20 +81,8 @@ public class FacturaDAO{
             System.out.println("Data Added Successfully");
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (ptmt != null)
-                    ptmt.close();
-                if (connection != null)
-                    connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }
     }
-
 
     public List<Factura> todo() {
         ArrayList facturaList = new List<Factura>();
@@ -102,20 +99,7 @@ public class FacturaDAO{
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (resultSet != null)
-                    resultSet.close();
-                if (ptmt != null)
-                    ptmt.close();
-                if (connection != null)
-                    connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+        } 
         return facturaList;
     }
 
@@ -131,21 +115,6 @@ public class FacturaDAO{
                 int valor = resultSet.getInt("valor");
                 Factura factura = new Factura(cliente, valor);
                 facturaList.add(factura);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (resultSet != null)
-                    resultSet.close();
-                if (ptmt != null)
-                    ptmt.close();
-                if (connection != null)
-                    connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
             }
         }
         return facturaList;

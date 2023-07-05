@@ -3,7 +3,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class FacturaDAO {
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class FacturaDAO{
+
     Connection connection = null;
     PreparedStatement ptmt = null;
     ResultSet resultSet = null;
@@ -14,118 +20,62 @@ public class FacturaDAO {
         return conn;
     }
 
-    public void add(StudentBean studentBean) {
+    private void closeConnection(){
+        if (resultSet != null)
+            resultSet.close();
+        if (ptmt != null)
+            ptmt.close();
+        if (connection != null)
+            connection.close();
+    }
+
+    public void guardar(Factura factura) {
         try {
-            String queryString = "INSERT INTO student(RollNo, Name, Course, Address) VALUES(?,?,?,?)";
+            String queryString = "INSERT INTO factura (nombre, valor) VALORES(?,?)";
             connection = getConnection();
             ptmt = connection.prepareStatement(queryString);
-            ptmt.setInt(1, studentBean.getRollNo());
-            ptmt.setString(2, studentBean.getName());
-            ptmt.setString(3, studentBean.getCourse());
-            ptmt.setString(4, studentBean.getAddress());
+            ptmt.setString(1, factura.getCliente());
+            ptmt.setInt(2, studentBean.getValor());
             ptmt.executeUpdate();
             System.out.println("Data Added Successfully");
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (ptmt != null)
-                    ptmt.close();
-                if (connection != null)
-                    connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
         }
     }
 
-    public void update(StudentBean studentBean) {
-
+    public List<Factura> todo() {
+        ArrayList facturaList = new List<Factura>();
         try {
-            String queryString = "UPDATE student SET Name=? WHERE RollNo=?";
-            connection = getConnection();
-            ptmt = connection.prepareStatement(queryString);
-            ptmt.setString(1, studentBean.getName());
-            ptmt.setInt(2, studentBean.getRollNo());
-            ptmt.executeUpdate();
-            System.out.println("Table Updated Successfully");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (ptmt != null)
-                    ptmt.close();
-                if (connection != null)
-                    connection.close();
-            }
-
-            catch (SQLException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-
-            }
-        }
-    }
-
-    public void delete(int rollNo) {
-
-        try {
-            String queryString = "DELETE FROM student WHERE RollNo=?";
-            connection = getConnection();
-            ptmt = connection.prepareStatement(queryString);
-            ptmt.setInt(1, rollNo);
-            ptmt.executeUpdate();
-            System.out.println("Data deleted Successfully");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (ptmt != null)
-                    ptmt.close();
-                if (connection != null)
-                    connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        }
-
-    }
-
-    public void findAll() {
-        try {
-            String queryString = "SELECT * FROM student";
+            String queryString = "SELECT * FROM factura";
             connection = getConnection();
             ptmt = connection.prepareStatement(queryString);
             resultSet = ptmt.executeQuery();
             while (resultSet.next()) {
-                System.out.println("Roll No " + resultSet.getInt("RollNo")
-                        + ", Name " + resultSet.getString("Name") + ", Course "
-                        + resultSet.getString("Course") + ", Address "
-                        + resultSet.getString("Address"));
+                String cliente = resultSet.getString("nombre");
+                int valor = resultSet.getInt("valor");
+                Factura factura = new Factura(cliente, valor);
+                facturaList.add(factura);
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (resultSet != null)
-                    resultSet.close();
-                if (ptmt != null)
-                    ptmt.close();
-                if (connection != null)
-                    connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
         }
+        return facturaList;
+    }
+
+    public List<Factura> todosConAlMenos(int valor) {
+        ArrayList facturaList = new List<Factura>();
+        try {
+            String queryString = "SELECT * FROM factura WHERE " + valor + " >= ?";
+            connection = getConnection();
+            ptmt = connection.prepareStatement(queryString);
+            resultSet = ptmt.executeQuery();
+            while (resultSet.next()) {
+                String cliente = resultSet.getString("nombre");
+                int valor = resultSet.getInt("valor");
+                Factura factura = new Factura(cliente, valor);
+                facturaList.add(factura);
+            }
+        }
+        return facturaList;
     }
 }
