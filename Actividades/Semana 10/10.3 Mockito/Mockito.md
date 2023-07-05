@@ -225,8 +225,8 @@ public class UserGreetingTest {
             	.isEqualTo("Hola y bienvenido, Kapumota");
 	}
 }
+```
 
-````
 12. ¿Qué sucede si vuelves a ejecutar la prueba?. 
 
 ### Escribiendo un mock con Mockito
