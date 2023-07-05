@@ -479,5 +479,87 @@ http://localhost:8080
 
 El cual nos mostrara la siguiente pagina
 
-![nginx](./imagenes/docker.png)
+![metodo 1](./imagenes/docker_m1.png)
 
+
+### Método 2 (1 punto): Usando un contenedor existente
+
+Descargamos la imagen de alpine Linux
+
+```bash
+docker image pull alpine:latest
+```
+
+Ejecutamos el contenedor de alpine Linux
+
+```bash
+docker container run -it --name alpine-test alpine /bin/sh
+```
+
+Instalamos NGINX en el contenedor
+
+```bash
+apk update
+apk upgrade
+apk add --update nginx
+rm -rf /var/cache/apk/*
+mkdir -p /tmp/nginx/
+```
+
+Salimos del contenedor
+
+```bash
+exit
+```
+
+Podemos guardar el contenedor como una nueva imagen
+
+```bash
+docker container commit alpine-test local:broken-container
+```
+
+Tambien podemos guardar esta imagen como un archivo TAR
+
+```bash
+docker image save -o broken-container.tar local:broken-container
+```
+
+El nombre "broken-container" se utiliza para mostrar como guardariamos un contenedor con problemas como imagen
+
+### Método 3 (1 punto) : Desplegando la imágen desde cero 
+
+Creamos un archivo llamado Dockerfile con el siguiente contenido
+
+```Dockerfile
+FROM scratch
+ADD files/alpine-minirootfs-3.11.3-x86_64.tar.gz /
+CMD [“/bin/sh”]
+```
+
+Construimos una imagen de docker con el nombre local:scratch
+
+```bash
+docker image build --tag local:fromscratch .
+```
+
+Verificamos que la imagen se haya creado correctamente
+
+```bash
+docker image ls
+```
+
+Procedemos a lanzar la imagen en un contenedor
+
+```bash
+docker container run -it --name alpine-test local:fromscratch /bin/sh
+```
+
+Verificamos la version de alpine Linux
+
+```bash
+cat /etc/alpine-release
+```
+
+Podemos ver que la version de alpine Linux es la siguiente
+
+![metodo 3](./imagenes/docker_m3.png)
