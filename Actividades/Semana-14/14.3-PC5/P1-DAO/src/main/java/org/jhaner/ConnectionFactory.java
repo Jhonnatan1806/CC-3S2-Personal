@@ -4,33 +4,31 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-
 public class ConnectionFactory {
-    String driverClassName = "org.postgresql.Driver";
-    String connectionUrl = "jdbc:postgresql://localhost:5432/factura";
-    String dbUser = "root";
-    String dbPwd = "123456";
 
-    private static ConnectionFactory connectionFactory = null;
+    private static final String DRIVER_CLASS_NAME = "org.postgresql.Driver";
+    private static final String CONNECTION_URL = "jdbc:postgresql://localhost:5432/cc3s2";
+    private static final String DB_USER = "postgres";
+    private static final String DB_PASSWORD = "123456";
+
+    private static ConnectionFactory instance;
 
     private ConnectionFactory() {
         try {
-            Class.forName(driverClassName);
+            Class.forName(DRIVER_CLASS_NAME);
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Failed to load the JDBC driver", e);
         }
-    }
-
-    public Connection getConnection() throws SQLException {
-        Connection conn = null;
-        conn = DriverManager.getConnection(connectionUrl, dbUser, dbPwd);
-        return conn;
     }
 
     public static ConnectionFactory getInstance() {
-        if (connectionFactory == null) {
-            connectionFactory = new ConnectionFactory();
+        if (instance == null) {
+            instance = new ConnectionFactory();
         }
-        return connectionFactory;
+        return instance;
+    }
+
+    public Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(CONNECTION_URL, DB_USER, DB_PASSWORD);
     }
 }

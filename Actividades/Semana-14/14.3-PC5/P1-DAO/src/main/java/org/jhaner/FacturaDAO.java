@@ -13,10 +13,6 @@ public class FacturaDAO{
     PreparedStatement ptmt = null;
     ResultSet resultSet = null;
 
-    public FacturaDAO() throws SQLException{
-        this.connection = getConnection();
-    }
-
     public Connection getConnection() throws SQLException {
         Connection conn;
         conn = ConnectionFactory.getInstance().getConnection();
@@ -32,24 +28,41 @@ public class FacturaDAO{
             connection.close();
     }
 
-    public void cleanTable() {
+    public void resetDatabase() {
         try {
             String dropTableQuery = "DROP TABLE IF EXISTS facturas;";
-            PreparedStatement dropStatement = connection.prepareStatement(dropTableQuery);
-            dropStatement.executeUpdate();
+            connection = getConnection();
+            ptmt = connection.prepareStatement(dropTableQuery);
+            ptmt.executeUpdate();
             System.out.println("Table dropped successfully");
-            String createTableQuery = "CREATE TABLE facturas (nombre VARCHAR(50), valor int);";
-            PreparedStatement createStatement = connection.prepareStatement(createTableQuery);
-            createStatement.executeUpdate();
+            String createTableQuery = "CREATE TABLE facturas (nombre VARCHAR(50) NOT NULL, valor int NOT NULL);";
+            ptmt = connection.prepareStatement(createTableQuery);
+            ptmt.executeUpdate();
             System.out.println("Table created successfully");
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
+    public void startTransaction() throws SQLException {
+        connection.setAutoCommit(false);
+    }
+
+    public void commitTransaction() throws SQLException {
+        connection.commit();
+        connection.setAutoCommit(true);
+    }
+
+    public void guardarFacturas(Factura... facturas) throws SQLException {
+        for (Factura factura : facturas) {
+            guardar(factura);
+        }
+    }
+
     public void guardar(Factura factura) {
         try {
             String queryString = "INSERT INTO factura (nombre, valor) VALORES(?,?)";
+            connection = getConnection();
             ptmt = connection.prepareStatement(queryString);
             ptmt.setString(1, factura.getCliente());
             ptmt.setInt(2, factura.getValor());
@@ -64,6 +77,7 @@ public class FacturaDAO{
         List facturaList = new ArrayList<Factura>();
         try {
             String queryString = "SELECT * FROM factura";
+            connection = getConnection();
             ptmt = connection.prepareStatement(queryString);
             resultSet = ptmt.executeQuery();
             while (resultSet.next()) {
@@ -82,6 +96,7 @@ public class FacturaDAO{
         List facturaList = new ArrayList<Factura>();
         try {
             String queryString = "SELECT * FROM factura WHERE " + value + " >= ?";
+            connection = getConnection();
             ptmt = connection.prepareStatement(queryString);
             resultSet = ptmt.executeQuery();
             while (resultSet.next()) {
