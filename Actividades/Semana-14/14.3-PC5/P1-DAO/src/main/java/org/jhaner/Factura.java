@@ -1,3 +1,5 @@
+package org.jhaner;
+
 import java.util.Objects;
 
 public class Factura {
@@ -32,6 +34,6 @@ public class Factura {
     }
 
     public String getCliente(){
-        return this.cliente
+        return this.cliente;
     }
 }

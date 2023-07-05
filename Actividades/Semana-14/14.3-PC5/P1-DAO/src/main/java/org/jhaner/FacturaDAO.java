@@ -1,12 +1,11 @@
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+package org.jhaner;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FacturaDAO{
 
@@ -14,13 +13,17 @@ public class FacturaDAO{
     PreparedStatement ptmt = null;
     ResultSet resultSet = null;
 
-    private Connection getConnection() throws SQLException {
+    public FacturaDAO() throws SQLException{
+        this.connection = getConnection();
+    }
+
+    public Connection getConnection() throws SQLException {
         Connection conn;
         conn = ConnectionFactory.getInstance().getConnection();
         return conn;
     }
 
-    private void closeConnection(){
+    public void closeConnection() throws SQLException {
         if (resultSet != null)
             resultSet.close();
         if (ptmt != null)
@@ -29,13 +32,27 @@ public class FacturaDAO{
             connection.close();
     }
 
+    public void cleanTable() {
+        try {
+            String dropTableQuery = "DROP TABLE IF EXISTS facturas;";
+            PreparedStatement dropStatement = connection.prepareStatement(dropTableQuery);
+            dropStatement.executeUpdate();
+            System.out.println("Table dropped successfully");
+            String createTableQuery = "CREATE TABLE facturas (nombre VARCHAR(50), valor int);";
+            PreparedStatement createStatement = connection.prepareStatement(createTableQuery);
+            createStatement.executeUpdate();
+            System.out.println("Table created successfully");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void guardar(Factura factura) {
         try {
             String queryString = "INSERT INTO factura (nombre, valor) VALORES(?,?)";
-            connection = getConnection();
             ptmt = connection.prepareStatement(queryString);
             ptmt.setString(1, factura.getCliente());
-            ptmt.setInt(2, studentBean.getValor());
+            ptmt.setInt(2, factura.getValor());
             ptmt.executeUpdate();
             System.out.println("Data Added Successfully");
         } catch (SQLException e) {
@@ -44,10 +61,9 @@ public class FacturaDAO{
     }
 
     public List<Factura> todo() {
-        ArrayList facturaList = new List<Factura>();
+        List facturaList = new ArrayList<Factura>();
         try {
             String queryString = "SELECT * FROM factura";
-            connection = getConnection();
             ptmt = connection.prepareStatement(queryString);
             resultSet = ptmt.executeQuery();
             while (resultSet.next()) {
@@ -62,11 +78,10 @@ public class FacturaDAO{
         return facturaList;
     }
 
-    public List<Factura> todosConAlMenos(int valor) {
-        ArrayList facturaList = new List<Factura>();
+    public List<Factura> todosConAlMenos(int value) {
+        List facturaList = new ArrayList<Factura>();
         try {
-            String queryString = "SELECT * FROM factura WHERE " + valor + " >= ?";
-            connection = getConnection();
+            String queryString = "SELECT * FROM factura WHERE " + value + " >= ?";
             ptmt = connection.prepareStatement(queryString);
             resultSet = ptmt.executeQuery();
             while (resultSet.next()) {
@@ -75,6 +90,8 @@ public class FacturaDAO{
                 Factura factura = new Factura(cliente, valor);
                 facturaList.add(factura);
             }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
         return facturaList;
     }

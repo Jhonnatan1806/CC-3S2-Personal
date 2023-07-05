@@ -1,16 +1,15 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+package org.jhaner;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+
 
 public class ConnectionFactory {
-    String driverClassName = "com.mysql.jdbc.Driver";
-    String connectionUrl = "jdbc:mysql://localhost:3306/factura";
+    String driverClassName = "org.postgresql.Driver";
+    String connectionUrl = "jdbc:postgresql://localhost:5432/factura";
     String dbUser = "root";
-    String dbPwd = "root";
+    String dbPwd = "123456";
 
     private static ConnectionFactory connectionFactory = null;
 
