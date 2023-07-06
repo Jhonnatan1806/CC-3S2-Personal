@@ -68,21 +68,6 @@ public class FacturaDAO{
         }
     }
 
-    public void startTransaction() throws SQLException {
-        connection.setAutoCommit(false);
-    }
-
-    public void commitTransaction() throws SQLException {
-        connection.commit();
-        connection.setAutoCommit(true);
-    }
-
-    public void guardarFacturas(Factura... facturas) throws SQLException {
-        for (Factura factura : facturas) {
-            guardar(factura);
-        }
-    }
-
     public void guardar(Factura factura) {
         try {
             String queryString = "INSERT INTO factura (nombre, valor) VALORES(?,?)";
