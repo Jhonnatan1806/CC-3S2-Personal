@@ -15,8 +15,11 @@
     - [Fase 2.5](#fase-25)
   - [Fase 3](#fase-3)
     - [Pregunta](#pregunta)
+    - [Fase 3.1](#fase-31)
   - [Fase 4](#fase-4)
     - [Pregunta](#pregunta-1)
+    - [Codigo](#codigo-1)
+    - [Fase 4.1](#fase-41)
   - [Fase 5](#fase-5)
     - [Pregunta](#pregunta-2)
 
@@ -262,6 +265,18 @@ Si, la refactorizacion ayudo a la mejor calidad del codigo, ya que se elimino co
 
 Utiliza la clase AirportTest refactorizada antes de pasar al trabajo para el vuelo premium en el código desarrollado como mejora a tus resultados. Ver el codigo entregado en la evaluación. 
 
+### Fase 3.1
+
+Se implemento el codigo entregado en la evalucion obteniendo una mejor cobertura de codigo en las pruebas
+
+```Bash
+Airport.java: 0% methods, 0% lines coverage
+BusinessFlight.java: 100% methods, 100% lines coverage
+EconomyFlight.java: 100% methods, 100% lines coverage
+Flight.java: 100% methods, 100% lines coverage
+Passenger.java: 100% methods, 100% lines coverage
+```
+
 ## Fase 4
 
 ### Pregunta
@@ -272,6 +287,45 @@ Ahora implementa las pruebas de acuerdo con la lógica comercial de vuelos premi
 1. Se agrega un pasajero a un vuelo premium, solo si es pasajeros VIP
 2. Cualquier tipo de pasajero puede ser eliminado de un vuelo premium.
 
+### Codigo
+
+Se implemento la clase PremiumFlight que extiende de Flight y se implementaron los metodos abstractos heredados addPassenger y removePassenger.
+
+PremiumFlight.java
+
+```Java
+public class PremiumFlight extends Flight {
+
+    public PremiumFlight(String id) {
+        super(id);
+    }
+
+    @Override
+    public boolean addPassenger(Passenger passenger) {
+        if(passenger.isVip()){
+            return passengers.add(passenger);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean removePassenger(Passenger passenger) {
+        return passengers.remove(passenger);
+    }
+}
+```
+
+### Fase 4.1
+
+Se agrega un pasajero a un vuelo premium, solo si es pasajeros VIP
+
+
 ## Fase 5
 
 ### Pregunta
+
+Para garantizar la unicidad de los pasajeros en un vuelo, cambia la estructura de la lista de pasajeros a un conjunto. Entonces, hace una refactorización de código que también se propagará a través de las 
+pruebas. Luego crea una nueva prueba para verificar que un pasajero solo se puede agregar una vez a un vuelo
+
+1. ¿Cómo cambia la clase de vuelo en este contexto?.
+2. ¿Consigues una mejor cobertura de código?

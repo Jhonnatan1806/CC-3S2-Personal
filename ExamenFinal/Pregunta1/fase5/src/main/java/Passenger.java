@@ -15,6 +15,8 @@ public class Passenger {
     public boolean isVip() { 
         return vip; 
 
-    } 
+    }
+
+  
 
 } 
